@@ -1,2 +1,0 @@
-# Hahyeon
- Hahyeon's Hardware
