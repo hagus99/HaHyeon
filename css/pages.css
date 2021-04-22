@@ -61,12 +61,12 @@ a:link{
     width: 80%;
     margin-left:20%;
     margin-right:20%;
-    min-width: 600px;
-    
+    min-width: 600px;  
 }   
 
 .l_title{
     font-weight: bold;
+    margin-top: 40px;
 }
 
 #tag_list div{
