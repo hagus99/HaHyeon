@@ -4,33 +4,49 @@
         <meta charset="UTF-8">
         <title>HAGUS HARDWARE</title>
         <link rel="stylesheet" type="text/css" href="css/pages.css">
+        <script src="includeHTML.js"></script>
     </head>
 </html>
 
 <body>
+
     <header>
-        <h3><a href = "index.html">HAGUS HARDWARE</a></h3> 
+        <h3><a href = "index.html">HAGUS <br>HARDWARE</a></h3> 
         <ul>
             <li><a href ="index.html">ABOUT</a></li>
             <li><a href ="TIL.html">TIL</a></li>
             <li><a href ="tag.html">TAG</a></li>
         </ul>
     </header>
+ 
+<!--
+    <header include-html="header.html"></header>
+    <script>
+        includeHTML();
+    </script>
+    -->
 
-    <section class="section">
-    <div class = "tag_menu">
-        <div><a href=".l_list">log</a></div>
+    
+
+    <section class="section">    
+
+    <div id = "tag_menu">
+        <div><a href="#log">log</a></div>
         <div><a href=".l_list">Playlist</a></div>
         <div><a href=".l_list">Booklist</a></div>
     </div>
 
+    <script src = "tag_menu.js"></script>
+
     <div id = "tag_list">
-        <div class="l_title">log. </div>
-        <div><sapn class = "title"><a href = "./posts/log/2020.4.20.html">[Serendipity] 뜻밖의 발견 (장소, 시간, 사람들, 이야기)</span><span class="date">2020.4.20</span></a></div>
-        <div class="l_title">Playlist. </div>
-        <div class="l_title">Booklist. </div>
-        
+        <div id="log" class="l_title">log. </div><hr>
+        <div class="l_subtitle"><div class = "title"><a href = "./posts/log/2020.4.20.html">[Serendipity] 뜻밖의 발견 (장소, 시간, 사람들, 이야기)</div><div id="date">2020.4.20</div></a></div>
+        <div class="l_title">Playlist. </div><hr>
+        <div class="l_subtitle"><div class = "title"><a href = "./posts/playlist/dear_god.html">[Cory Asbury] Dear God</div><div id="date">2020.4.27</div></a></div>
+        <div class="l_title">Booklist. </div><hr>
     </div>
+
+    <script src = "tag_list.js"></script>
 
 </section>
 
