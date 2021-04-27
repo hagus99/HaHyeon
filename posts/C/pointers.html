@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>HAGUS HARDWARE</title>
+        <link rel="stylesheet" type="text/css" href="../../css/pages.css">
+    </head>
+</html>
+
+<body>
+    <header>
+        <h3><a href = "../../index.html">HAGUS <br> HARDWARE</a></h3> 
+        <ul>
+            <li><a href ="../../index.html">ABOUT</a></li>
+            <li><a href ="../../TIL.html">TIL</a></li>
+            <li><a href ="../../tag.html">TAG</a></li>
+        </ul>
+    </header>
+
+    <section class="section">
+    <div id = "tag_menu">
+        <div><a href="../../tag.html">Bible</a></div>
+        <div><a href="../../tag.html">OS</a></div>
+        <div><a href="../../tag.html">Beak-Joon</a></div>
+    </div>
+
+    <script src = "../../TIL_tag_menu.js"></script>
+
+    <div id = "tag_list">
+        <div class="l_title"><a href = "../../TIL.html">C. </a></div><hr>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[C]Pointers</div><div class="date">2020.4.27</div></strong></a></div>
+             <!--content-->
+        <p class = "content">
+            <strong>Using Pointer Variables</strong>
+            <br>
+            Declaration<br>
+            int *p = NULL; //initialize by NULL pointer<br>
+            //NULL is defined as ‘#define NULL ((void*)0)’ in stdio.h<br>
+            <br>
+            *&a = a<br>
+            How about &*a?<br>
+            <br>
+            <br>
+            <strong>Pointers to Pointers</strong>
+            <br>
+            a = 58;<br>
+            p = &a;<br>
+            q = &p;<br>
+            <br>
+            printf(“%3d”, a);<br>
+            printf(“%3d”, *p);<br>
+            printf(“%3d”, **q);<br>
+            <br>
+            //모두 똑같이 58이 나온다.<br>
+            <br>
+            <br>
+            <strong>Compatibility</strong>
+            <br>
+            //Pointer type compatibility<br>
+            Ex) char c = ‘\0’ , *pc = NULL;<br>
+            int a = 0;<br>
+            pc = &c; // no problem<br>
+            pc = &a; // prohibited<br>
+            <br>
+            //Pointer size compatibility<br>
+            int i, *pi;<br>
+            char c, *pc;<br>
+            float f, *pf;<br>
+            sizeof(i) != sizeof(c) != sizeof(f)<br>
+            sizeof(pi) = sizeof(pc) = sizeof(pf)<br>
+            <br>
+            <br>
+            <strong>Pointer to Void</strong>
+            <br>
+            void type pointer (void *) is just to store a generic address<br>
+            A generic type that is not associated with a reference type<br>
+            void pointer can store any type of pointers<br>
+            <br>
+            ex)<br>
+            void *vp = NULL;<br>
+            int a = 0;<br>
+            char c = ‘\0’;<br>
+            vp = &a; //assigning integer pointer to vp<br>
+            vp = &c; //assigning character pointer to vp<br>
+            <br>
+            NULL pointer<br>
+            # define NULL ((void*)0) // in stdio.h<br>
+            ex)<br>
+            int a = 0;<br>
+            int *p = 0; //type mismatched<br>
+            int *p = NULL; //OK<br>
+            void pointer cannot be dereferenced as it is<br>
+            int a = 10;<br>
+            void *pVoid = &a;<br>
+            *pVoid = 10; //illegal<br>
+            To be dereferenced, void pointer should be casted.<br>
+            <br>
+            Void pointer can be dereferenced by casting<br>
+            Int a = 10;<br>
+            void *pVoid = &a;<br>
+            printf(“*(int)pVoid = %d\n”,*(int*)pVoid);<br>
+            <br>
+            <br>
+        </p>
+
+    </div>
+
+</section>
+
+    
+</body>
+
+
