@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>HAGUS HARDWARE</title>
+        <link rel="stylesheet" type="text/css" href="../../css/pages.css">
+    </head>
+</html>
+
+<body>
+    <header>
+        <h3><a href = "../../index.html">HAGUS <br> HARDWARE</a></h3> 
+        <ul>
+            <li><a href ="../../index.html">ABOUT</a></li>
+            <li><a href ="../../TIL.html">TIL</a></li>
+            <li><a href ="../../tag.html">TAG</a></li>
+        </ul>
+    </header>
+
+    <section class="section">
+    <div id = "tag_menu">
+        <div><a href="../../tag.html">Bible</a></div>
+        <div><a href="../../tag.html">OS</a></div>
+        <div><a href="../../tag.html">Beak-Joon</a></div>
+    </div>
+
+    <script src = "../../TIL_tag_menu.js"></script>
+
+    <div id = "tag_list">
+        <div class="l_title"><a href = "../../TIL.html">C. </a></div><hr>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[C] String</div><div class="date">2020.4.30</div></strong></a></div>
+             <!--content-->
+        <p class = "content">
+            <strong>Strings in C Language</strong><br>
+            <br>
+            스트링은 문자열이다. 여러개의 캐릭터들로 이루어져있다 <br>
+            Array of characters<br>
+            End of string is denoted by null character('\0')
+            *null character 와 null pointer는 다른 말이다. (character와 pointer의 차이)<br>
+            <span style="background-color: lightgrey;">String vs. Character</span><br>
+            char 'H' => 1byte  /  string "H" => 2bytes(H,\0)  /  " "(Empty String) => \0<br>
+            string 과 character arrays의 차이점은 맨뒤에 \0 (null character가 붙는지 안붙는지에 대한 차이)<br>
+            <br>
+            - string은 그 시작 주소에 의해서 access된다. <br>
+            - &str[i] == str + i // a substring , starting from the i char.<br>
+            str[i]번째 부터 뒤의 character가 연결되는 substring이 된다. <br>
+            - strlen 함수는 순수하게 문자열 길이만 구하며 NULL부분은 포함되지 않는다. <br>
+            - Note! Assignment to a string is permitted only for initialization.<br>
+            배열일 때 Assignment는 불가능하지만 포인터이면 Assignment가 가능하다. <br>
+            ex)<br>
+            char str1 [9] = "Good Day"; //초기화 할 때는 가능<br>
+            char str2[9];<br>
+            char *pStr = NULL;<br>
+            <br>
+
+            str1 = "Good Day" //error<br>
+            str2 = str1 //error<br>
+            pStr = str1; //가능 <br>
+            <br>
+            <br>
+            <strong>String Input/Output Functions</strong><br>
+            char message[256];<br>
+            scanf("%s",message);<br>
+            //Delimiter of scanf : white space characters<br>
+            //만약 Hello world 라고 입력하면 scanf는 Hello까지만 받게 된다.<br>
+            <br>
+            char *gets(chr *strptr);<br>
+            Delimiter: '\n'(엔터까지 입력받을 수 있다. '\n' 대신에 '\0'이 마지막에 들어가게 된다.)<br>
+            
+
+
+            <br>
+            <strong>String Manipulation Functions</strong><br>
+            <br>
+            <strong>String/Data Conversion</strong><br>
+            <br>
+            <br>
+        </p>
+
+    </div>
+
+</section>
+
+    
+</body>
+
+
