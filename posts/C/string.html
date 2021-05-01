@@ -13,7 +13,7 @@
         <ul>
             <li><a href ="../../index.html">ABOUT</a></li>
             <li><a href ="../../TIL.html">TIL</a></li>
-            <li><a href ="../../tag.html">TAG</a></li>
+            <li><a href ="../../tag.html">LOG</a></li>
         </ul>
     </header>
 
@@ -28,11 +28,11 @@
 
     <div id = "tag_list">
         <div class="l_title"><a href = "../../TIL.html">C. </a></div><hr>
-        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[C] String</div><div class="date">2020.4.30</div></strong></a></div>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[C] String</div><div class="date">2020.04.30</div></strong></a></div>
              <!--content-->
         <p class = "content">
-            <strong>Strings in C Language</strong><br>
             <br>
+            <strong style = "font-size: medium;">Strings in C Language</strong><br>
             스트링은 문자열이다. 여러개의 캐릭터들로 이루어져있다 <br>
             Array of characters<br>
             End of string is denoted by null character('\0')
@@ -58,21 +58,40 @@
             pStr = str1; //가능 <br>
             <br>
             <br>
-            <strong>String Input/Output Functions</strong><br>
+            <br>
+            <strong style = "font-size: medium;">String Input/Output Functions</strong><br>
             char message[256];<br>
             scanf("%s",message);<br>
             //Delimiter of scanf : white space characters<br>
             //만약 Hello world 라고 입력하면 scanf는 Hello까지만 받게 된다.<br>
             <br>
-            char *gets(chr *strptr);<br>
+            Input: char *gets(chr *strptr);<br>
             Delimiter: '\n'(엔터까지 입력받을 수 있다. '\n' 대신에 '\0'이 마지막에 들어가게 된다.)<br>
-            
-
-
+            Output: int puts(char *strPtr);<br>
+            <span style="background-color: lightgray;">gets() vs. fgets()</span><br>
+            gets() replaces '\n' with '\0' => gets는 마지막 엔터키를 널 캐릭터로 바꾼다.<br>
+            fgets() keep '\n' and appends '\0' => fgest는 엔터키를 그대로 두고 그 뒤에 널 캐릭터를 붙인다.<br>
             <br>
-            <strong>String Manipulation Functions</strong><br>
             <br>
-            <strong>String/Data Conversion</strong><br>
+            <br>
+            <strong style = "font-size: medium;">!! String Manipulation Functions !!</strong><br>
+            if (str1 < str2) // str의 값을 비교하는 것이 아닌 각 각의 주소값을 비교한다.<br>
+            str3 = str1 + str2 //c 언어에서는 불가능 <br>
+            <span stryle = "background-color:lightgray;">Important Functions</span><br>
+            #include <string.h>
+            String length : strlen<br>
+            String copy : strcpy, strncpy, strcpy_s<br>
+            String compare : strcmp, strncmp<br>
+            String concatenation: strcat, strncat, strcat_S<br>
+            <br>
+            * strcmp(str1,str2) < 0 //str1이 str2보다 사전상으로 앞에 있음을 의미<br>
+            <br>
+            <br>
+            <br>
+            <strong style = "font-size: medium;">String/Data Conversion</strong><br>
+            ex) sscanf("35 x 50", %d %*c %d",&width,&height);<br>
+            //%*c 여기에서 *의 의미는 매칭하지 말고 버리라는 뜻이다.<br>
+
             <br>
             <br>
         </p>

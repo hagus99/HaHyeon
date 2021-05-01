@@ -1,3 +1,6 @@
+*{
+    font-family: 'Arial';
+}
 body{
     height:100%;
     width:100%;
@@ -127,4 +130,7 @@ hr{
     line-height: 150%;
 }
 
+p{
+    font-size: small;
+}
 

@@ -31,17 +31,18 @@
         <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[C] Pointer Applications</div><div class="date">2020.4.28</div></strong></a></div>
              <!--content-->
         <p class = "content">
-        <strong>Arrays and Pointers</strong><br>
-        <br>
-        #include <stdio.h><br>
-        int main ()<br>
-        {<br>
-            int a[5] = {2,4,6,8,22};<br>
-            int *p;<br>
-            p = &a[1];<br>
-            printf("%d %d\n", a[0],p[-1]);<br>
-            printf("%d %d\n", a[1],p[0]);<br>
-        }<br>
+        <strong style="font-size: medium;">Arrays and Pointers</strong><br>
+
+#include <stdio.h><br>
+int main ()<br>
+{<br>
+    int a[5] = {2,4,6,8,22};<br>
+    int *p;<br>
+    p = &a[1];<br>
+    printf("%d %d\n", a[0],p[-1]);<br>
+    printf("%d %d\n", a[1],p[0]);<br>
+}<br>
+    
         <br>
         result : <br>
         2 2 <br> 4 4<br>
@@ -49,8 +50,9 @@
         p = p+1 //다음 주소값을 나타낸다. 사실은 숫자 뒤에 변수 사이즈가 곱해진다. <br>
         p + n ==&p[n], *(p + n) == p[n]<br>
         <br>
-        <strong>Pointer Arithmetic and Arrays</strong><br>
         <br>
+        <br>
+        <strong style="font-size: medium;">Pointer Arithmetic and Arrays</strong><br>
         int a[10]; //a는 상수이다.<br>
         int *p = a;<br>
         a = a+1; //invalid<br>
@@ -66,9 +68,9 @@
         double poiner<br>
         ex) table[i][j] = (*(table+i))[j] = *(*(table+i)+j) = *(table[i]+j)<br>
         <br>
-        
-        <strong>! Memory Allocation Functions !</strong><br>
         <br>
+        <br>
+        <strong style="font-size: medium;">! Memory Allocation Functions !</strong><br>
         Program memory : program code (instructions)<br>
         Data memory : data storage (variable, dynamic memory)<br>
         - Global memory : global variables<br>
