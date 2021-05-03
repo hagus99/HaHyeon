@@ -30,81 +30,106 @@
         <div class="l_title"><a href = "../../TIL.html">C. </a></div><hr>
         <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[C] Pointer Applications</div><div class="date">2020.4.28</div></strong></a></div>
              <!--content-->
-        <p class = "content">
-        <strong style="font-size: medium;">Arrays and Pointers</strong><br>
-
-#include <stdio.h><br>
-int main ()<br>
-{<br>
-    int a[5] = {2,4,6,8,22};<br>
-    int *p;<br>
-    p = &a[1];<br>
-    printf("%d %d\n", a[0],p[-1]);<br>
-    printf("%d %d\n", a[1],p[0]);<br>
-}<br>
-    
-        <br>
-        result : <br>
-        2 2 <br> 4 4<br>
+        <div class = "content">
+            <br>
+        <strong style="font-size: large;">Arrays and Pointers</strong><br>
+        
+    <code>
+    <pre>
+    #include <stdio.h><br>
+    int main ()
+    {
+        int a[5] = {2,4,6,8,22};
+        int *p;
+        p = &a[1];
+        printf("%d %d\n", a[0],p[-1]);
+        printf("%d %d\n", a[1],p[0]);
+    }<br>
+    </pre>
+    </code>
+    <div style="display : block; background-color: #EEEEEE; padding:15px">
+        <strong>[Result]</strong><br>
+        2 2<br>
+        4 4<br>
+    </div>
         <br>
         p = p+1 //다음 주소값을 나타낸다. 사실은 숫자 뒤에 변수 사이즈가 곱해진다. <br>
         p + n ==&p[n], *(p + n) == p[n]<br>
+
+
         <br>
         <br>
         <br>
-        <strong style="font-size: medium;">Pointer Arithmetic and Arrays</strong><br>
-        int a[10]; //a는 상수이다.<br>
-        int *p = a;<br>
-        a = a+1; //invalid<br>
-        p = p+1; //valid<br>
-        p++; //valid<br>
+        <strong style="font-size: large;">Pointer Arithmetic and Arrays</strong><br>
+        <code>
+        <pre>
+        int a[10];     // a는 상수이다.
+        int *p = a;
+        a = a+1;     // invalid
+        p = p+1;     // valid
+        p++;     // valid
+        </pre>
+        </code>
         <br>
-        Using pointers<br>
+        <strong>Using pointers</strong><br>
         int *p = NULL, *limit = a+5;<br>
         for(p = a; p < limit; p++)<br>
         printf("%d\n",*p);<br>
         //이와 같은 포인터 연산이 배열 연산보다 빠르다.<br>
         <br>
-        double poiner<br>
+        <strong>Double poiner</strong><br>
         ex) table[i][j] = (*(table+i))[j] = *(*(table+i)+j) = *(table[i]+j)<br>
         <br>
         <br>
         <br>
-        <strong style="font-size: medium;">! Memory Allocation Functions !</strong><br>
+        <strong style="font-size: large;">! Memory Allocation Functions !</strong><br>
         Program memory : program code (instructions)<br>
         Data memory : data storage (variable, dynamic memory)<br>
         - Global memory : global variables<br>
         - Stack : local variables<br>
         - Heap : dynamically allocatied memory<br>
         <br> 
-        <br>
         malloc 타입은 void* 이다.<br>
-        ex)<br>
-        #include <malloc.h><br>
-        int *data = NULL;<br>
-        data = (int*)malloc(n*sizeof(int));<br>
-        //if it fails, return NULL<br>
-        free(data);<br>
         <br>
-        ex)<br>
-        int *pi=NULL; // NULL을 꼭 집어넣는 습관 들이기!<br> 
-        // pi = (int *) malloc(sizeof(int)); // forgot<br>
-        *pi = 10; // error<br>
+        <span style="background-color: lightgray;">Ex.</span>
+        <code>
+        <pre>
+        #include <malloc.h><br>
+        int *data = NULL;
+        data = (int*)malloc(n*sizeof(int));
+        // if it fails, return NULL
+        free(data);
+        </pre>
+    </code>
+        <br>
+        <span style="background-color: lightgray;">Ex.</span>
+        <code>
+        <pre>
+        int *pi=NULL; // NULL을 꼭 집어넣는 습관 들이기!
+        // pi = (int *) malloc(sizeof(int)); // forgot
+        *pi = 10; // error
+    </pre>
+    </code>
         <br>
         - free()를 두번이상 호출하면 error<br>
         - malloc은 main 또는 함수 내에서 하고 같은 공간에서 free를 해줘라! (권장)<br>
         - Always check the result of memory Allocation<br>
-        ex)<br> 
-        int *p = (int *)malloc(size_in_bytes);<br>
-        if( p == NULL){<br>
-            printf("Failed to allocate memoty.\n");<br>
-            exit(-1); //optional<br>
-        }<br>
         <br>
 
+    <span style="background-color: lightgray;">Ex.</span>
+    <code>
+    <pre>
+        int *p = (int *)malloc(size_in_bytes);
+        if( p == NULL){
+            printf("Failed to allocate memoty.\n");
+            exit(-1); //optional
+        }
+    </pre>
+    </code>
+    <br>
+    <br>
 
-
-        </p>
+    </div>
 
     </div>
 

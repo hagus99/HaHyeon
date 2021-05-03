@@ -30,7 +30,7 @@
         <div class="l_title"><a href = "../../TIL.html">C. </a></div><hr>
         <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[C] String</div><div class="date">2020.04.30</div></strong></a></div>
              <!--content-->
-        <p class = "content">
+        <div class = "content">
             <br>
             <strong style = "font-size: medium;">Strings in C Language</strong><br>
             스트링은 문자열이다. 여러개의 캐릭터들로 이루어져있다 <br>
@@ -47,15 +47,19 @@
             - strlen 함수는 순수하게 문자열 길이만 구하며 NULL부분은 포함되지 않는다. <br>
             - Note! Assignment to a string is permitted only for initialization.<br>
             배열일 때 Assignment는 불가능하지만 포인터이면 Assignment가 가능하다. <br>
-            ex)<br>
-            char str1 [9] = "Good Day"; //초기화 할 때는 가능<br>
-            char str2[9];<br>
-            char *pStr = NULL;<br>
+            
+            <code style="background-color:#F5F5F5F5; display:block;">
+           <pre>
+        Ex)<br>
+        char str1 [9] = "Good Day"; //초기화 할 때는 가능
+        char str2[9];
+        char *pStr = NULL;
             <br>
-
-            str1 = "Good Day" //error<br>
-            str2 = str1 //error<br>
-            pStr = str1; //가능 <br>
+        str1 = "Good Day" // error
+        str2 = str1 // error
+        pStr = str1; // 가능
+            </pre>
+            </code>
             <br>
             <br>
             <br>
@@ -94,7 +98,7 @@
 
             <br>
             <br>
-        </p>
+        </div>
 
     </div>
 
