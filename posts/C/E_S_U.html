@@ -30,12 +30,11 @@
         <div class="l_title"><a href = "../../TIL.html">C. </a></div><hr>
         <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[C] Enum, Structure, Union</div><div class="date">2020.05.01</div></strong></a></div>
              <!--content-->
-        <p class = "content">
+        <div class = "content">
             <span style = "background-color: lightgray;">c 언어에서는 기존에 있는 데이터 타입을 조합해서 새로운 데이터 타입을 만들 수 있다.</span> <br>
             <br>
             <span class="h">Typedef</span><br>
             typedef는 사용자가 데이터 타입의 이름을 붙혀서 새로운 데이터 타입을 만들 수 있다.<br>
-            Syntax: typedef <br>
             ex) typedef unsigned int size_t; // in search.h <br>
             ex) typedef int INTEGER;<br>
             INTEGER x;<br>
@@ -48,28 +47,32 @@
             ex) Colors: RED, BLUE, YELLOW . . . <br>
             #define RED 0과 같이 여러개를 선언해줘도 되지만 간단하게 enum을 사용한다. <br>
             Syntax: enum tag { identifier_list};<br>
-            ex) enum Color { RED, BLUE, GREEN, WHITE};<br>
-            enum Color 자체가 데이터 타입이 된다. <br>
+            ex) enum Color { RED, BLUE, GREEN, WHITE}; // enum Color 자체가 데이터 타입이 된다. <br>
             ex) int func(enum Color curColor);<br>
             <br>
-            Example<br>
-            // definition of Color type<br>
-            enum Color { RED, GREEN, BLUE, WHITE, PURPLE, . . .};<br>
-            // variable declarations<br>
-            enum Color x, y, z;<br>
-            <br>
-            x = BLUE;<br>
-            y = WHITE;<br>
-            z = PURPLE;<br>
-            <br>
-            if(x == BLUE){ <br>
-                . . .<br>
-            }<br>
-            <br>
-            switch(y){<br>
-            case WHITE;<br>
-            . . .<br>
-            }<br>
+            <code>
+            <pre>
+        <strong>Ex.</strong>
+
+        // definition of Color type
+        enum Color { RED, GREEN, BLUE, WHITE, PURPLE, . . .};
+        // variable declarations
+        enum Color x, y, z;
+        
+        x = BLUE;
+        y = WHITE;
+        z = PURPLE;
+        
+        if(x == BLUE){
+            . . .
+        }
+        
+        switch(y){
+            case WHITE;
+            . . .
+        }
+            </pre>
+            </code>
             <br>
             <span style="background-color: lightgray;">typedef vs. #define</span><br>
             #define INTP int* <br>
@@ -97,27 +100,42 @@
             Structure: collection of related elements, possibly of different types.<br>
             ex) FILE is a structure type defined in stdio.h<br>
             Defining a user - defined data type.<br>
+            <br>
             struct [tag] { <br>
                 field list<br>
             };<br>
             <br>
-            <span style ="background-color: lightgray;">방법 1. </span><br>
-            struct STUDENT {<br>
-                char id[10];<br>
-                char name[26];<br>
-                enum Major;<br>
-            };<br>
-            <br>
-            struct STUDENT student[50];<br>
-            <br>
-            <span style ="background-color: lightgray;">방법 2. </span><br>
-            typedef struct {<br>
-                char id[10];<br>
-                char name [26];<br>
-                enum Major major;<br>
-            }STUDENT;<br>
-            <br>
-            STUDENT student[50];<br>
+        
+            <div style = "display:flex;">
+            <code style="margin-right: 40px; padding:20px;">
+            <pre>
+<strong>방법 1. </strong>
+
+struct STUDENT {
+    char id[10];
+    char name[26];
+    enum Major;
+};
+
+struct STUDENT student[50];
+    </pre>
+    </code>
+
+    <code style="padding:20px;">
+    <pre>
+<strong>방법 2. </strong>
+    
+typedef struct {
+    char id[10];
+    char name [26];
+    enum Major major;
+}STUDENT;
+
+STUDENT student[50];
+            </pre>
+            </code>
+            </div>
+
             <br>
             ex) Accessing Structures<br>
             SAMPLE sam2;<br>
@@ -138,19 +156,24 @@
             <br>
             <span class = "h">Unioms</span><br>
             union은 문법적으로 봤을 때 structure와 비슷하다. <br>
-            ex) <br>
-            union shareData<br>
-            {<br>
-                char chAry[2];<br>
-                short num;<br>
-            };<br>
+            <code>
+            <pre>
+        <strong>Ex.</strong>
+
+        union shareData
+        {
+            char chAry[2];
+            short num;
+        };
+            </pre>
+            </code>
             <br>
             structure 안에 있는 변수들은 독립적인 메모리 공간을 사용하지만<br>
             union 안에 있는 변수들은 메모리 공간을 공유한다.<br>
 
             <br>
             <br>
-        </p>
+        </div>
 
     </div>
 

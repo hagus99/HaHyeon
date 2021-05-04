@@ -13,7 +13,7 @@
         <ul>
             <li><a href ="../../index.html">ABOUT</a></li>
             <li><a href ="../../TIL.html">TIL</a></li>
-            <li><a href ="../../tag.html">TAG</a></li>
+            <li><a href ="../../tag.html">LOG</a></li>
         </ul>
     </header>
 
@@ -30,78 +30,112 @@
         <div class="l_title"><a href = "../../TIL.html">C. </a></div><hr>
         <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[C]Pointers</div><div class="date">2020.4.27</div></strong></a></div>
              <!--content-->
-        <p class = "content">
-            <strong>Using Pointer Variables</strong>
+        <div class = "content">
             <br>
-            Declaration<br>
-            int *p = NULL; //initialize by NULL pointer<br>
+            <br>
+            <span class="h">Using Pointer Variables</span>
+            <br>
+            <br>
+            <strong>Declaration</strong><br>
+            int *p = NULL; // initialize by NULL pointer<br>
             //NULL is defined as ‘#define NULL ((void*)0)’ in stdio.h<br>
             <br>
             *&a = a<br>
             How about &*a?<br>
             <br>
             <br>
-            <strong>Pointers to Pointers</strong>
             <br>
-            a = 58;<br>
-            p = &a;<br>
-            q = &p;<br>
+            <span class="h">Pointers to Pointers</span>
             <br>
-            printf(“%3d”, a);<br>
-            printf(“%3d”, *p);<br>
-            printf(“%3d”, **q);<br>
-            <br>
-            //모두 똑같이 58이 나온다.<br>
-            <br>
-            <br>
-            <strong>Compatibility</strong>
-            <br>
-            //Pointer type compatibility<br>
-            Ex) char c = ‘\0’ , *pc = NULL;<br>
-            int a = 0;<br>
-            pc = &c; // no problem<br>
-            pc = &a; // prohibited<br>
-            <br>
-            //Pointer size compatibility<br>
-            int i, *pi;<br>
-            char c, *pc;<br>
-            float f, *pf;<br>
-            sizeof(i) != sizeof(c) != sizeof(f)<br>
-            sizeof(pi) = sizeof(pc) = sizeof(pf)<br>
+            <code>
+            <pre>
+        a = 58;
+        p = &a;
+        q = &p;
+        
+        printf(“%3d”, a);
+        printf(“%3d”, *p);
+        printf(“%3d”, **q);
+            </pre>
+            </code>
+            모두 똑같이 58이 나온다.<br>
             <br>
             <br>
-            <strong>Pointer to Void</strong>
             <br>
-            void type pointer (void *) is just to store a generic address<br>
-            A generic type that is not associated with a reference type<br>
-            void pointer can store any type of pointers<br>
-            <br>
-            ex)<br>
-            void *vp = NULL;<br>
-            int a = 0;<br>
-            char c = ‘\0’;<br>
-            vp = &a; //assigning integer pointer to vp<br>
-            vp = &c; //assigning character pointer to vp<br>
-            <br>
-            NULL pointer<br>
-            # define NULL ((void*)0) // in stdio.h<br>
-            ex)<br>
-            int a = 0;<br>
-            int *p = 0; //type mismatched<br>
-            int *p = NULL; //OK<br>
-            void pointer cannot be dereferenced as it is<br>
-            int a = 10;<br>
-            void *pVoid = &a;<br>
-            *pVoid = 10; //illegal<br>
-            To be dereferenced, void pointer should be casted.<br>
-            <br>
-            Void pointer can be dereferenced by casting<br>
-            Int a = 10;<br>
-            void *pVoid = &a;<br>
-            printf(“*(int)pVoid = %d\n”,*(int*)pVoid);<br>
+            <span class ="h">Compatibility</span>
             <br>
             <br>
-        </p>
+            <div style="display: flex;">
+                <code style="margin-right: 30px; padding:30px;">
+                <strong>Pointer type compatibility</strong><br>
+                <br>
+                ex) char c = ‘\0’ , *pc = NULL;<br>
+                int a = 0;<br>
+                pc = &c; // no problem<br>
+                pc = &a; // prohibited<br>
+                </code>
+                <br>
+                <code style="padding:30px;">
+                <strong>Pointer size compatibility</strong><br>
+                <br>
+                int i, *pi;<br>
+                char c, *pc;<br>
+                float f, *pf;<br>
+                sizeof(i) != sizeof(c) != sizeof(f)<br>
+                sizeof(pi) = sizeof(pc) = sizeof(pf)<br>
+                </code>
+            </div>
+            <br>
+            <br>
+            <span class="h">Pointer to Void</span>
+            <br>
+            <br>
+            <li style="margin-left: 10px;">void type pointer (void *) is just to store a generic address</li>
+            <li style="margin-left: 10px;">A generic type that is not associated with a reference type</li>
+            <li style="margin-left: 10px;">void pointer can store any type of pointers</li>
+            <br>
+            <code>
+            <pre>
+        <strong>Ex.</strong>
+        
+        void *vp = NULL;
+        int a = 0;
+        char c = ‘\0’;
+        vp = &a; //assigning integer pointer to vp
+        vp = &c; //assigning character pointer to vp
+            </pre>
+            </code>
+            <br>
+            <li style="margin-left: 10px;"> NULL pointer</li>
+            <pre>     # define NULL ((void*)0) // in stdio.h 
+
+            </pre>
+            <code>
+            <pre>
+        <strong>Ex.</strong>
+
+        int a = 0;
+        int *p = 0; // type mismatched
+        int *p = NULL; // OK
+
+        void pointer cannot be dereferenced as it is
+
+        int a = 10;
+        void *pVoid = &a;
+        *pVoid = 10; // illegal
+
+        To be dereferenced, void pointer should be casted.
+
+        Void pointer can be dereferenced by casting
+
+        Int a = 10;
+        void *pVoid = &a;
+        printf(“*(int)pVoid = %d\n”,*(int*)pVoid);
+            </pre>
+            </code>
+            <br>
+            <br>
+        </div>
 
     </div>
 

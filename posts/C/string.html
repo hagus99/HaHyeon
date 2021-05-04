@@ -50,17 +50,17 @@
             
             <code style="background-color:#F5F5F5F5; display:block;">
            <pre>
-        Ex)<br>
+        <strong>Ex.</strong>
+
         char str1 [9] = "Good Day"; //초기화 할 때는 가능
         char str2[9];
         char *pStr = NULL;
-            <br>
+        
         str1 = "Good Day" // error
         str2 = str1 // error
         pStr = str1; // 가능
             </pre>
             </code>
-            <br>
             <br>
             <br>
             <strong style = "font-size: medium;">String Input/Output Functions</strong><br>
@@ -81,20 +81,29 @@
             <strong style = "font-size: medium;">!! String Manipulation Functions !!</strong><br>
             if (str1 < str2) // str의 값을 비교하는 것이 아닌 각 각의 주소값을 비교한다.<br>
             str3 = str1 + str2 //c 언어에서는 불가능 <br>
-            <span stryle = "background-color:lightgray;">Important Functions</span><br>
-            #include <string.h>
-            String length : strlen<br>
-            String copy : strcpy, strncpy, strcpy_s<br>
-            String compare : strcmp, strncmp<br>
-            String concatenation: strcat, strncat, strcat_S<br>
-            <br>
+            <code>
+            <pre>
+        <span stryle = "background-color:lightgray;"><strong>Important Functions</strong></span><br>
+        #include <string.h><br>
+        String length : strlen
+        String copy : strcpy, strncpy, strcpy_s
+        String compare : strcmp, strncmp
+        String concatenation: strcat, strncat, strcat_S
+            </pre>
+            </code>
             * strcmp(str1,str2) < 0 //str1이 str2보다 사전상으로 앞에 있음을 의미<br>
             <br>
             <br>
             <br>
             <strong style = "font-size: medium;">String/Data Conversion</strong><br>
-            ex) sscanf("35 x 50", %d %*c %d",&width,&height);<br>
-            //%*c 여기에서 *의 의미는 매칭하지 말고 버리라는 뜻이다.<br>
+            <code>
+        <pre>
+        <strong>Ex.</strong>
+        
+        sscanf("35 x 50", %d %*c %d",&width,&height);
+        </pre>
+            </code>
+            %*c 여기에서 *의 의미는 매칭하지 말고 버리라는 뜻이다.<br>
 
             <br>
             <br>

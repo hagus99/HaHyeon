@@ -13,7 +13,7 @@
         <ul>
             <li><a href ="../../index.html">ABOUT</a></li>
             <li><a href ="../../TIL.html">TIL</a></li>
-            <li><a href ="../../tag.html">TAG</a></li>
+            <li><a href ="../../tag.html">LOG</a></li>
         </ul>
     </header>
 
@@ -54,7 +54,8 @@
     </div>
         <br>
         p = p+1 //다음 주소값을 나타낸다. 사실은 숫자 뒤에 변수 사이즈가 곱해진다. <br>
-        p + n ==&p[n], *(p + n) == p[n]<br>
+        p + n ==&p[n]<br>
+        *(p + n) == p[n]<br>
 
 
         <br>
@@ -91,9 +92,10 @@
         <br> 
         malloc 타입은 void* 이다.<br>
         <br>
-        <span style="background-color: lightgray;">Ex.</span>
         <code>
         <pre>
+        <strong>Ex.</strong>
+
         #include <malloc.h><br>
         int *data = NULL;
         data = (int*)malloc(n*sizeof(int));
@@ -102,9 +104,10 @@
         </pre>
     </code>
         <br>
-        <span style="background-color: lightgray;">Ex.</span>
         <code>
         <pre>
+        <strong>Ex.</strong>
+
         int *pi=NULL; // NULL을 꼭 집어넣는 습관 들이기!
         // pi = (int *) malloc(sizeof(int)); // forgot
         *pi = 10; // error
@@ -116,9 +119,10 @@
         - Always check the result of memory Allocation<br>
         <br>
 
-    <span style="background-color: lightgray;">Ex.</span>
     <code>
     <pre>
+        <strong>Ex.</strong>
+        
         int *p = (int *)malloc(size_in_bytes);
         if( p == NULL){
             printf("Failed to allocate memoty.\n");
