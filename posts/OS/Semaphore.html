@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Semaphore</title>
+        <link rel="stylesheet" type="text/css" href="../../css/pages.css">
+    </head>
+</html>
+
+<body>
+    <header>
+        <h3><a href = "../../index.html">HAGUS <br> HARDWARE</a></h3> 
+        <ul>
+            <li><a href ="../../index.html">ABOUT</a></li>
+            <li><a href ="../../TIL.html">TIL</a></li>
+            <li><a href ="../../tag.html">TAG</a></li>
+        </ul>
+    </header>
+
+    <section class="section">
+    <div id = "tag_menu">
+        <div><a href="../../tag.html">Bible</a></div>
+        <div><a href="../../tag.html">OS</a></div>
+        <div><a href="../../tag.html">Beak-Joon</a></div>
+    </div>
+
+    <script src = "../../TIL_tag_menu.js"></script>
+
+    <div id = "tag_list">
+        <div class="l_title"><a href = "../../TIL.html">OS. </a></div><hr>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] Semaphore </div><div class="date">2020.05.05</div></strong></a></div>
+             <!--content-->
+        <div class = "content">
+        <br>
+        <span class="h">Semaphores</span><br>
+        <br>
+        <li class="l">Semaphore는 추상자료형. 구체적인 구현이 아닌 추상적으로 정의해놓은 것</li>
+        <li class="l">Semaphore S : 정수값을 가질 수 있음 (integer variable, 자원의 개수)</li>
+        <li class="l">아래의 두 가지 atomic 연산에 의해서만 접근 가능</li>
+        <br>
+        <code>
+        <pre>
+        <span><strong>P(S)</strong></span>
+
+        세마포어 변수 획득(공유데이터을 획득하는 과정)
+        lock을 거는 과정이다.
+        busy waiting 문제 발생한다.
+        
+        while(S<=0) do no-op; // i.g. wait
+        S--;
+
+        </pre>
+        </code>
+       
+        <code>
+        <pre>
+        <span><strong>V(S)</strong></span>
+
+        다 사용하고 반납하는 과정
+        lock을 푸는 과정이다.
+        
+        while(S<=0) do no-op; // i.g. wait
+        S--;
+        
+        </pre>
+        </code>
+
+        <code>
+        <pre>
+        <span><strong>Critical Section & Using semaphore </strong></span>
+
+        <strong>Synchronization variable</strong>
+        semaphore mutex; // initially 1: 1개가 C.S에 들어갈 수 있다. 
+
+        <strong>Process Pi</strong>
+        do{
+            P(mutex);
+            <strong>critical section</strong>
+            V(mutex);
+            <strong>remainder section</strong>
+        }while(1);
+        </pre>
+        </code>
+        위의 코드는 busy-wait. 이것은 효율적이지 못함 (=spin lock)<br>
+        다음은 Block & Wakeup 방식의 구현(=sleep lock)<br>
+        <br>
+        <br>
+        <br>
+        <span class="h">Block & Wakeup 방식</span> 
+        <br>
+        <code>
+        <pre>
+        typedef struct 
+        {
+            int value;   // semaphore 실제 세마포어 변수
+            struct process *L;   // process wait queue 세마포어를 연결할 수 있는 큐
+        }semaphore;
+
+        </pre>
+        </code>
+
+        <strong>block</strong>
+        <li class="l">만약 세마포어를 획득할 수 없으면 그 프로세스를 block시킨다.</li>
+        <li class="l">커널은 block을 호출한 프로세스를 suspend시킴</li>
+        <li class="l">이 프로세스의 PCB를 semaphore에 대한 wait queue에 넣음</li>
+        <br>
+        <strong>wakeup(P)</strong>
+        <li class="l">block된 프로세스 P를 wakeup시킴, 이 프로세스의 PCB를 ready queue로 옮김.</li>
+
+        <code>
+        <pre>
+        <strong>P(S)</strong>
+
+        자원을 획득하는 과정
+
+        S.value--;
+        if (S.value < 0)
+        {
+            add this process to S.L;
+            block();
+        }
+        </pre>
+        </code>
+
+        <code>
+        <pre>
+        <strong>V(S)</strong>
+        
+        자원을 반납하는 과정
+        이때, 자원을 반납하기만 하는 것이 아니라 잠들어 있던 block을 깨워주는 것 까지 함!
+
+        S.value++;
+
+        /* 
+           자원을 내놓았는데도 자원이 0 이하라면 잠자고 있는 것이다. 
+           위에서와는 달리 S.value는 자원의 개수를 나타낸다기 보다는 양수이면 누군가 쓰고 있다는 것,
+           음수이면 잠들어 있다는 것이다. 
+           즉, 누군가 깨워야 하는 지 아닌지를 확인하기 위해서 S.value를 사용한다. 
+        */
+
+        if (S.value <= 0)
+        {
+            remove a process P from S.L;
+            wakeup(P);
+        }
+        </pre>
+        </code>
+        <br>
+        <br>
+        <br>
+
+        <span class = "h">Which is better?</span><br>
+        <br>
+        <strong>Busy-wait vs. Block/Wakeup</strong><br>
+        보통은 block & wakeup을 쓰는 것이 효율적이다. 쓸데없이 cpu를 계속 쓰면서 기다릴 필요 없이<br>
+        cpu를 반납하고 block된 상태로 들어가는 것이 cpu의 이용률이 높아진다. <br>
+        그렇지만 굳이 나누어 보자면 block/wakeup도 overhead가 있다. <br>
+        Critical section의 길이가 짧은 경우, Busy-wait를 써도 문제 없다. <br>
+        Critical section의 길이가 긴 경우, cpu의 사용 시간이 길어지기 때문에 Block/wakeup이 적당하다.<br>
+        일반적으로는 block/wakeup이 좋음<br>
+        <br>
+        <br>
+        <br>
+
+        <span class = "h">Two Type of Semaphores</span><br>
+        <br>
+        <strong>Counting semaphore</strong><br>
+        <li class ="l">자원의 개수가 여러개 있어서 여분이 있으면 가져다 쓸 수 있는 것</li>
+        <li class ="l">도메인이 0 이상인 임의의 정수 값</li>
+        <li class ="l">주로 resource counting에 사용</li>
+        <br>
+        <strong>Binary semaphore</strong><br>
+        <li class ="l">0또는 1 값만 가질 수 있는 semaphore</li>
+        <li class ="l">주로 mutual exclusion (lock/unlock)에 사용</li>
+        <br>
+        <br>
+        <br>
+        <span class = "h">Deadlock and Starvation</span><br>
+        <br>
+        <strong>Deadlock</strong><br>
+        둘 이상의 프로세스가 서로 상대방에 의해 충족될 수 있는 event를 무한히 기다리는 현상.<br>
+        <br>
+        <strong>Starvation</strong><br>
+        deadlock도 일종의 starvation이라고 볼 수 도 있지만 여기서는 특정 프로세스가 자원을 획득하지 못하도록 하는 것<br>
+        <br>
+        <code>
+        <pre>
+        <strong>Dining-Philosophers Problem</strong>
+
+        <strong>Synchronization variables</strong>
+        semaphore chopstick[5];
+        /* Initially all values are 1 */
+
+        <strong>Philosopher i</strong>
+        do {
+            P(chopstick[i]);
+            P(chopstick[(i+1)%5]);
+            ...
+            eat();
+            V(chopstick[i]);
+            V(chopstick[(i+1)%5]);
+            ...
+            think();
+            ...
+        } while(1);
+
+        </pre>
+        </code>
+
+
+    
+
+        <br>
+        <br>
+        <br>
+            
+        </div>
+
+    </div>
+
+</section>
+
+    
+</body>
+
+

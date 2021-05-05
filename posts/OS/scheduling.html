@@ -30,68 +30,101 @@
         <div class="l_title"><a href = "../../TIL.html">OS. </a></div><hr>
         <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] CPU_Scheduling </div><div class="date">2020.4.29</div></strong></a></div>
              <!--content-->
-        <p class = "content">
+        <div class = "content">
+            <br>
             <br>
             <strong style="font-size: medium;">Scheduling Criteria</strong><br>
-            - CPU utilization : keep the CPU as busy as possible <br>
-            - Throughput : # of processes completed per time unit<br>
-            - Turnaroundtime<br>
-            - Waiting time<br>
-            - Response time <br>
+            <br>
+            <li class="l">CPU utilization : keep the CPU as busy as possible </li>
+            <li class="l">Throughput : # of processes completed per time unit</li>
+            <li class="l">TurnAroundTime</li>
+            <li class="l">Waiting time</li>
+            <li class="l">Response time </li>
             <br>
             <br>
             <br>
             <strong style="font-size: medium;">Scheduling Algorithm</strong><br>
-            - First-come, first-served (FCFS) scheduling<br>
-            - Shortest-job-first (SJF) scheduling<br>
-            - Priority scheduling<br>
-            - Round-robin scheduling<br>
-            - Multilevel queue scheduling<br>
-            - Multiple feedback-queue scheduling<br>
             <br>
-            <span style="background: lightgray;">First-com, first-served (FCFS) scheduling</span><br>
-            Non-preemptive scheduling<br>
-            Simplest scheduling method<br>
-            CPU, I/O utilities are inefficient<br>
+            <li class="l">First-come, first-served (FCFS) scheduling</li>
+            <li class="l">Shortest-job-first (SJF) scheduling</li>
+            <li class="l">Priority scheduling</li>
+            <li class="l">Round-robin scheduling</li>
+            <li class="l">Multilevel queue scheduling</li>
+            <li class="l">Multiple feedback-queue scheduling</li>
             <br>
-            <span style="background: lightgray;">Shorest-Job-First Scheduling</span><br>
-            SJF algorithm is optimal in mininum waiting time<br>
-            Problem: difficult to know length of next CPU burst<br>
-            Non-preemptive SJF or Preemptive SJF<br>
-            <br>
-            <span style="background: lightgray;">Priority scheduling</span><br>
-            Preemptive or Non-preemptive<br>
-            lower number means higher priority<br>
-            우선순위는 어떻게 정하는 것일까?<br>
-            1. Internally : Time limit, memory requirement, # of open files, ratio of I/O burst and CPU burst<br>
-            2. Externally : importance, political factors<br>
-            Problem: Indefinite blocking (= starvation) of processes with lower priorities<br>
-            => Solution : aging (gradually increase priority of processes waiting for long time)<br>
-            레디 큐에서 오래 기다리면 기다릴 수록 우선순위를 조금씩 올려주는 것!<br>
-            <br>
-            <span style="background: lightgray;">Round-robin Scheduling</span><br>
-            - Similar to FCFS, but it's preemptive<br>
-            - Designed for time-sharing systems(시분할 시스템)<br>
-            - CPU time is divided into time quantum (or time slice)<br>
-            * A time quantum is 10~qpp msec.(1초동안 10번 혹은 100번 스위칭)
-            - Ready queue is treaded as cicular queue<br>
-            - CPU scheduler goes around the ready queue and allocate CPU time up to 1 time quantum<br>
-            - Time quantum에 의존적이다. <br>
-            - Time quantum이 만약 무한대가 되면 RR scheduling은 FCFS와 같다. <br>
-            - Time quantum이 0에 수렴시키면 프로세스가 거의 동시에 실행하는 것처럼 보이지만 문제점은 Context switching overhead가 빈번하다.<br>
-            - Time quantum을 어떻게 설정하느냐에 따라 성능이 결정된다. <br>
-            <br>
+            <code>
+            <pre>
+        <strong>First-com, first-served (FCFS) scheduling</strong>
 
-            <span style="background: lightgray;">Multilevel queue scheduling</span><br>
+        - Non-preemptive scheduling
+        - Simplest scheduling method
+        - CPU, I/O utilities are inefficient
+            </pre>
+            </code>
+            <br>
+            <code>
+            <pre>
+        <strong>Shorest-Job-First Scheduling</strong>
+
+        - SJF algorithm is optimal in mininum waiting time
+        - Problem: difficult to know length of next CPU burst
+        - Non-preemptive SJF or Preemptive SJF
+            </pre>
+            </code>
+        <br>
+        <code>
+        <pre>
+        <strong>Priority scheduling</strong>
+
+        - Preemptive or Non-preemptive
+        - lower number means higher priority
+
+        우선순위는 어떻게 정하는 것일까?
+            1. Internally : Time limit, memory requirement, # of open files, ratio of I/O burst and CPU burst
+            2. Externally : importance, political factors
+
+        Problem: Indefinite blocking (= starvation) of processes with lower priorities
+        => Solution : aging (gradually increase priority of processes waiting for long time)
+        레디 큐에서 오래 기다리면 기다릴 수록 우선순위를 조금씩 올려주는 것!
+        </pre>
+        </code>
+            <br>
+        <code>
+        <pre>
+        <strong>Round-robin Scheduling</strong>
+        
+        - Similar to FCFS, but it's preemptive
+        - Designed for time-sharing systems(시분할 시스템)
+        - CPU time is divided into time quantum (or time slice)
+
+        * A time quantum is 10~qpp msec.(1초동안 10번 혹은 100번 스위칭)
+
+        - Ready queue is treaded as cicular queue
+        - CPU scheduler goes around the ready queue and allocate CPU time up to 1 time quantum
+        - Time quantum에 의존적이다. 
+        - Time quantum이 만약 무한대가 되면 RR scheduling은 FCFS와 같다. 
+        - Time quantum이 0에 수렴시키면 프로세스가 거의 동시에 실행하는 것처럼 보이지만 문제점은 
+          Context switching overhead가 빈번하다.
+        - Time quantum을 어떻게 설정하느냐에 따라 성능이 결정된다. 
+        </pre>
+        </code>
+        <br>
+
+        <code>
+        <pre>
+        <strong>Multilevel queue scheduling</strong>
+        </pre>
+        </code>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
 
         
 
-
-
-
-
-            
-        </p>
+        </div>
 
     </div>
 

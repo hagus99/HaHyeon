@@ -28,7 +28,7 @@
 
     <div id = "tag_list">
         <div class="l_title"><a href = "../../TIL.html">OS. </a></div><hr>
-        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] Process Synchronization </div><div class="date">2020.05.05</div></strong></a></div>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] Process Synchronization_01 </div><div class="date">2020.05.05</div></strong></a></div>
              <!--content-->
         <div class = "content">
         <br>
@@ -100,12 +100,34 @@
         문제점 : Busy Waiting (=spin lock)! (계속 CPU와 memory를 쓰면서 wait)<br>
         <br>
         <br>
-        문장 하나하나 실행되는 경우에도 CPU를 빼앗길 수 있다. <br>
+        instruction이 실행되는 경우에도 CPU를 빼앗길 수 있다. <br>
         하드웨어적으로 Test & modify를 atomic하게 수행할 수 있도록 지원하는 경우 앞의 문제는 간단히 해결!<br>
         데이터를 읽고 쓰는 것을 하나의 instruction으로 실행 할 수 없었기 때문에 이러한 문제가 발생했다<br>
         왜냐하면 instruction을 사용하는 도중에 CPU를 빼앗길 수 있기 때문이다.<br>
         데이터를 읽는 작업과 쓰는 작업을 하나의 instruction으로 가능하다면 instruction을 실행하는 도중에<br>
         CPU를 빼앗기지는 않을 것이다. 하드웨어적인 instruction이 제공이 된다면 앞에서 보았던 문제들을 해결할 수 있다.<br>
+        예시 코드는 아래에 있다.<br>
+        <br>
+        <code>
+        <pre>
+        <strong>Synchronization Hardware</strong>
+
+        Synchronization variable: boolean lock = false;
+        
+        Process pi
+
+        do{
+            while (Test_and_Set(lock));    
+            <strong>critical section</strong>
+            lock = false;           
+            <strong>remainder section</strong>
+        }while(1);
+        </pre>
+        </code>
+
+
+        <br>
+        <br>
 
 
             
