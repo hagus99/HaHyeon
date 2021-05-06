@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Classical Problem of Synchronization</title>
+        <link rel="stylesheet" type="text/css" href="../../css/pages.css">
+    </head>
+</html>
+
+<body>
+    <header>
+        <h3><a href = "../../index.html">HAGUS <br> HARDWARE</a></h3> 
+        <ul>
+            <li><a href ="../../index.html">ABOUT</a></li>
+            <li><a href ="../../TIL.html">TIL</a></li>
+            <li><a href ="../../tag.html">TAG</a></li>
+        </ul>
+    </header>
+
+    <section class="section">
+    <div id = "tag_menu">
+    </div>
+
+    <script src = "../../TIL_tag_menu.js"></script>
+
+    <div id = "tag_list">
+        <div class="l_title"><a href = "../../TIL.html">Class. </a></div><hr>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] Classical Problem of Synchronization </div><div class="date">2020.05.06</div></strong></a></div>
+             <!--content-->
+        <div class = "content">
+        <br>
+        <br>
+        <li class="l">Bounded-Buffer Problem (Producer-Consumer Problem</li>
+        <li class="l">Reader and Writers Problem</li>
+        <li class="l">Dining-Philosophers Problem</li>
+        <br>
+        <br>
+        <span class="h">Bounded-Buffer Problem (Producer-Consumer Problem)</span><br>
+        <br>
+        임시로 데이터를 저장하는 공간을 버퍼라고 함. 공유버퍼에서 Producer, Consumer가 있음<br>
+        Producer : 데이터를 버퍼에 집어 넣는 역할<br>
+        Consumer : 데이터를 버퍼에서 빼는 역할<br>
+        <br>
+        <strong>문제</strong><br>
+        공유버퍼를 쓸 때 lock을 걸었다 푸는 과정이 필요하다. <br>
+        Producer 입장에서는 버퍼가 가득차면 기다려야 한다.<br>
+        Consumer 입장에서는 버퍼가 비면 기다려야 한다. <br>
+
+        <code>
+        <pre>
+        <strong>Producer</strong>
+        1. Empty 버퍼가 있나요? (없으면 기다림)
+        2. 공유 데이터에 lock을 건다.
+        3. Empty buffer에 데이터 입력 및 buffer 조작
+        4. Lock을 푼다.
+        5. Full buffer 하나 증가
+        </pre>    
+        </code>
+
+        <br>
+        
+        <code>
+        <pre>
+        <strong>Consumer</strong>
+        1. Full 버퍼가 있나요? (없으면 기다림)
+        2. 공유데이터에 lock을 건다. 
+        3. Full buffer에 데이터 입력 및 buffer 조작
+        4. Lock을 푼다.
+        5. Empty buffer 하나 증가
+        </pre>
+        </code>
+        lock을 걸고 푸는 용도로 세마포어 변수 필요 & 자원의 개수를 카운트하는 변수로 사용 <br>
+        <br>
+        <code>
+        <pre>
+        <strong>Synchronization variables</strong>
+        semaphore full = 0, empty = n, mutex =1;  
+        // 변수 3개가 있는데 mutex: lock과 관련, full: 차있는 버퍼, empty: 비어있는 버퍼 n개.
+
+        <strong>Producer</strong>
+
+        do{ ...
+            produce an item in x
+            ...
+            P(empty);
+            P(mutex);
+            ...
+            add x to buffer
+            ...
+            V(mutex);
+            V(full);
+        }while(1);
+
+
+        <strong>Consumer</strong>
+        
+        do{ 
+            P(full);
+            P(mutex);
+            ...
+            remove an item from buffer to y
+            ...
+            V(mutex);
+            V(empty);
+            ...
+            consume the item in y
+        }while(1);
+        </pre>
+        </code>
+        <br>
+        <br>
+        <br>
+        <span class="h">Reader-Writers Problem</span><br>
+        <br>
+        <li class="l">Reader process 와 Writer process가 있다.</li>
+        <li class="l">공유데이터를 DB라고 한다.</li>
+        <li class="l">Reader와 Writer가 여러개 있다.</li>
+        <li class="l">쓰는 작업은 여럿이 하면 안되지만 읽는 작업을 여럿이 해도 된다.</li>
+        <code>
+        <pre>
+        <strong>Shared data</strong>
+        int readcount = 0;
+        DB 자체;
+
+        <strong>Synchronization variables</strong>
+        semaphore mutex = 1, db = 1;
+
+        <strong>Writer</strong>
+        P(db);
+            ...
+        writing DB is performed
+            ...
+        V(db);
+
+        <strong>Reader</strong>
+        읽어야 할 때도 lock을 걸어야 한다. 읽는 도중에 writer가 와서 쓸 수 있기 때문이다.
+        그래서 필요한 것은 reader 변수
+
+        P(mutex); // 여기서 mutex는 redcount에 대한 lock, readcount도 공유 변수이기 때문에 lock을 해줘야 한다.
+        readcount++;
+        if(redcount == 1)
+            P(db); // block writer
+        V(mutex);
+            ...
+        reading DB is performed
+            ...
+        P(mutex);
+        readcount--;
+        if(readcount == 0)
+            V(db); // enable writer
+        V(mutex);
+        </pre>
+        </code>
+        Starvation 발생 가능! reader가 많이 들어왔을 때!<br>
+        queue에 우선순위를 둬서 writer가 일정 수준을 기다리지 않게 하는 방법이 있다.<br>
+        <br>
+        <br>
+        <br>
+        <span class="h">Dining-Philosopers Problem</span><br>
+        <code>
+        <pre>
+        <strong>Synchronization</strong>
+
+        semaphore chopstick[5]; // Initially all variables are 1
+
+        <strong>Dining-Philosopher i</strong>
+        do{
+            P(chopstick[i]);
+            P(chopstick(i+1)%5);
+            ...
+            eat();
+            ...
+            V(chopstick[i]);
+            V(chopstick[(i+1) % 5]);
+        }while(1);
+        </pre>
+        </code>
+
+    
+        <br>
+        <br>
+        <br>
+        <br>
+            
+        </div>
+
+    </div>
+
+</section>
+
+    
+</body>
+
+
