@@ -13,6 +13,10 @@ let history = document.createElement('div');
 history.textContent = 'History';
 menu.appendChild(history);
 
+let Bible = document.createElement('div');
+Bible.textContent = 'Bible';
+menu.appendChild(Bible);
+
 let Playlist = document.createElement('div');
 Playlist.textContent = 'Playlist';
 menu.appendChild(Playlist);

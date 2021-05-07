@@ -1,9 +1,6 @@
 
 let menu = document.getElementById('tag_menu');
 //create new div element
-let Bible = document.createElement('div');
-Bible.textContent = 'Bible';
-menu.appendChild(Bible);
 
 let Class = document.createElement('div');
 Class.textContent = 'Class';

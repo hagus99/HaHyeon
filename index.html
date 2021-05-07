@@ -7,6 +7,7 @@
     <script src="includeHTML.js"></script>
 </head>
 
+
 <body>
     <!--
     <header include-html="header.html"></header>
@@ -28,10 +29,32 @@
 
 
     <div>
-        <div>
-            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FSQyVd%2Fbtq4kakxp8H%2F9G5rki06dy0nTEc3lNZGj0%2Fimg.jpg">
-    
+        <div class="slider">
+            <div class="slide" style="background-image: url(./img/about_01.JPG);"></div>
+            <div class="slide" style="background-image: url(./img/about_02.jpg);"></div>
+            <a class="prev" onclick="button_click(-1)">&#10094</a>
+            <a class="next" onclick="button_click(1)">&#10095</a>
         </div>
+
+        <script>
+            let currSlide = 1;
+            showSlide(currSlide);
+            
+            function button_click(num){
+              showSlide((currSlide += num));
+            }
+            function showSlide(num){
+              const slides = document.querySelectorAll(".slide");
+              if(num>slides.length){
+                currSlide =1;
+              }if(num<1){
+                currSlide = slides.length;
+              }
+              for(let i=0; i<slides.length; i++){
+                slides[i].style.display="none";
+              }slides[currSlide -1].style.display="block";
+            }
+            </script>
 
         <h4>Profile</h4>
         <p>
