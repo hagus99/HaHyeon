@@ -175,9 +175,131 @@
         }while(1);
         </pre>
         </code>
+        <br>
+        <strong>문제점</strong><br>
+        <li class = "l">Deadlock 가능성이 있다.</li>
+        <li clas = "l">모든 철학자가 동시에 배가 고파서 왼쪽 젓가락을 집어버린 경우</li>
+        <br>
 
+        <strong>해결방안</strong><br>
+        <li class="l">4명의 철학자만이 테이블에 동시에 앉을 수 있도록 한다.</li>
+        <li class="l">젓가락을 두 개 모두 집을 수 있을 때에만 젓가락을 집을 수 있게 한다.</li>
+        <li class="l">비대칭 : 짝수(홀수) 철학자는 왼쪽(오른쪽) 젓가락부터 잡도록</li>
     
         <br>
+        <br>
+        semaphore와 monitor는 Process Synchronization 부분에서 프로그래머가 어떻게 하면 쉽게 코드를<br>
+        짤 수 있을까에 대한 솔루션을 제공하는 것이다. semaphore를 사용해도 실수 할 수 있기 때문에 monitor를 제공한다.<br> 
+        두개는 서로 비슷하지만 monitor가 더 간단하다.<br>
+        <br>
+        <code>
+        <pre>
+        enum {thinking, hungry, eating} state[5];
+        semaphore self[5]=0;  // 1이면 젓가락 두개를 잡을 수 있는 권한이 있다. 
+        semaphore mutex=1;
+
+        <stron>Philocopher i</stron>
+        do {
+            pickup(i);
+            eat();
+            putdown(i);
+            think();
+        }while(1);
+
+        void putdown(int i){
+            P(mutex);
+            state[i] = thinking;
+            test((i+4)%5);
+            test((i+1)%5);
+            V(mutex);
+        }
+
+        void pickup(int i){
+            P(mutex);
+            state[i] = hungry;
+            test(i);
+            V(mutex);
+            P(self[i]);
+        }
+
+        void test (int i){
+            if(state[(i+4)%5)]!=eating && state[i]==hungry
+                && state[(i+1) % 5] ! = eating){
+                    state[i] = eating) {
+                        V(self[i]);
+                    }
+                }
+        }
+        </pre>
+        </code>
+        <br>
+        세마포어 변수는 보통 자원의 개수를 정해두고 그 자원을 사용하는 것인데 여기에서는 0으로 초기값을 정해 놓고<br>
+        체크하고 그것이 만족될 때 semaphore를 1로 바꾸는 방식이다. <br>
+        <br>
+        <strong>Semaphore의 문제점</strong>
+        <li class="l">코딩하기 힘들다</li>
+        <li class="l">정확성 (correctness)의 입증이 어렵다</li>
+        <li class="l">자발적 협력(voluntary cooperation이 필요하다.</li>
+        <li class="l">한번의 실수가 모든 시스템에 치명적 영향</li>
+        <br>
+        <br>
+        <br>
+        <span class="h">Monitor</span><br>
+        동시에 수행중인 프로세스 사이에서 abstract data type의 안전한 공유를 보장하기 위한<br>
+        high-level synchronization construct<br>
+        <br>
+        <code>
+        <pre>
+        monitor monitor-name{
+            // shared variable declarations
+            procedure body P1 (...){
+                ...
+            }
+            procedure body P2 (...){
+                ...
+            }
+            procedure body pn (...){
+                ...
+            }
+            {
+                initialization code
+            }
+        }
+        </pre>
+        </code>
+        <br>
+        semaphore는 항상 lock을 걸어야한다. (프로그래머가 해줘야함)<br>
+        monitor는 lock을 걸 필요가 없다. <br>
+        모니터 내에서는 한번에 하나의 프로세스만이 활동 가능
+        <br>
+        <code>
+        <pre>
+        monitor bounded_buffer
+        {
+            int buffer[N];
+            condition full, empty;
+            /* condition var.은 값을 가지지 않고 자신의 큐에 프로세스를 
+            매달아서 sleep 시키거나 큐에서 프로세스를 깨우는 역할만 함 */
+
+            void produre (int x)
+            {
+                if thre is no empty buffer
+                    empty.wait();
+                add x to an empty buffer
+                full.signal();
+            }
+
+            void consume (int *x)
+            {
+                if there is no full buffer 
+                    full.wait();
+                remove an item from buffer and store it to *x
+                empty.signal();
+            }
+        }
+        </pre>
+        </code>
+        코드가 더 이해하기 쉽다. lock을 걸 필요가 없다.<br>
         <br>
         <br>
         <br>
