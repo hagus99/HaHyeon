@@ -15,7 +15,7 @@ history.textContent = 'History';
 history.addEventListener('click',Mhistory);
 
 function Mhistory(event){
-    window.location.href = 'https://hagus99.github.io/HaHyeon/tag.html'
+    window.location.href = 'https://hagus99.github.io/HaHyeon/tag.html#history'
 }
 menu.appendChild(history);
 
@@ -27,7 +27,7 @@ Bible.textContent = 'Bible';
 Bible.addEventListener('click',Mbible);
 
 function Mbible(event){
-    window.location.href = '#bible'
+    window.location.href = 'https://hagus99.github.io/HaHyeon/tag.html#bible'
 }
 
 menu.appendChild(Bible);
@@ -38,7 +38,7 @@ Playlist.textContent = 'Playlist';
 Playlist.addEventListener('click',MPlaylist);
 
 function MPlaylist(event){
-    window.location.href = '#playlist'
+    window.location.href = 'https://hagus99.github.io/HaHyeon/tag.html#playlist'
 }
 
 menu.appendChild(Playlist);
@@ -49,7 +49,7 @@ Booklist.textContent = 'Booklist';
 Booklist.addEventListener('click',Mbooklist);
 
 function Mbooklist(event){
-    window.location.href = '#booklist'
+    window.location.href = 'https://hagus99.github.io/HaHyeon/tag.html#booklist'
 }
 menu.appendChild(Booklist);
 
@@ -61,7 +61,7 @@ movies.textContent = 'Movies';
 movies.addEventListener('click',Mmovies);
 
 function Mmovies(event){
-    window.location.href = '#movies'
+    window.location.href = 'https://hagus99.github.io/HaHyeon/tag.html#movies'
 }
 
 menu.appendChild(movies);
@@ -73,7 +73,7 @@ travel.textContent = 'Travel';
 travel.addEventListener('click',Mtravel);
 
 function Mtravel(event){
-    window.location.href = '#travel'
+    window.location.href = 'https://hagus99.github.io/HaHyeon/tag.html#travel'
 }
 
 menu.appendChild(travel);
