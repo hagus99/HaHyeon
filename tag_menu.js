@@ -68,7 +68,7 @@ menu.appendChild(movies);
 
 
 let travel = document.createElement('button');
-travel.textContent = 'Travel';
+travel.textContent = 'In & out';
 
 travel.addEventListener('click',Mtravel);
 
