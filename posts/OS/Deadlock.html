@@ -118,8 +118,10 @@ deadlock이 안생길 수도 있는데 그것을 막는 방법이기 때문에 �
 
 
 <span class = "h">처리방법 2. Deadlock Avoidance</span>
-이것도 처리방법 1과 같이 미리 deadlock을 예방하는 방법이다. 
-프로세스가 시작될 때 평생에 쓸 자원을 미리 알고 있다고 가정하고, Deadlock을 피해가는 것이다.
+- 이것도 처리방법 1과 같이 미리 deadlock을 예방하는 방법이다. 
+- Deadlock이 확실한 경우에만 요청을 받아드려 자원을 할당한다. 
+- 프로세스가 시작될 때 평생에 쓸 자원을 미리 알고 있다고 가정하고, Deadlock을 피해가는 것이다.
+
 
 <code>
         <strong>Single instance per resource types</strong>
@@ -133,8 +135,15 @@ deadlock이 안생길 수도 있는데 그것을 막는 방법이기 때문에 �
         <strong>Multiple instances per resource types</strong>
         자원당 instance가 여러개 있는 경우이다. 
         Banker's Algorithm 사용
+        -> 필요한 자원이 Available 자원 보다 적으면 주고 아니면 주지 않는다. 
 
 </code>
+
+- 자원이 남아도 deadlock가능성이 있다면 자원을 주지 않기 때문에 비효율적이다.
+
+
+
+<span class = "h">처리방법 2. Deadlock Avoidance</span>
 
 
 
