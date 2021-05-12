@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>백준 10818번 문제</title>
+        <link rel="stylesheet" type="text/css" href="../../css/pages.css">
+    </head>
+</html>
+
+<body>
+    <header>
+        <h3><a href = "../../index.html">HAGUS <br> HARDWARE</a></h3> 
+        <ul>
+            <li><a href ="../../index.html">ABOUT</a></li>
+            <li><a href ="../../TIL.html">TIL</a></li>
+            <li><a href ="../../tag.html">TAG</a></li>
+        </ul>
+    </header>
+
+    <section class="section">
+    <div id = "tag_menu">
+    </div>
+
+    <script src = "../../TIL_tag_menu.js"></script>
+
+    <div id = "tag_list">
+        <div class="l_title"><a href = "../../TIL.html">Self_Study</a></div><hr>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[백준] 10818번 최소, 최대 값 구하기</div><div class="date">///////////</div></strong></a></div>
+             <!--====content====-->
+        <div class = "content">
+        <br>    
+<pre>
+<strong>문제</strong>
+N개의 정수가 주어진다. 이때, 최솟값과 최댓값을 구하는 프로그램을 작성하시오. 
+
+<strong>입력</strong>
+첫째 줄에 정수의 개수 N (1 ≤ N ≤ 1,000,000)이 주어진다. 
+둘째 줄에는 N개의 정수를 공백으로 구분해서 주어진다. 모든 정수는 -1,000,000보다 크거나 같고, 
+1,000,000보다 작거나 같은 정수이다.
+
+<strong>출력</strong>
+첫째 줄에 주어진 정수 N개의 최솟값과 최댓값을 공백으로 구분해 출력한다.
+
+<code>
+    #include <stdio.h>
+
+    int main()
+    {
+        int size = 0;
+        scanf("%d",&size);
+        int num[size];
+    
+        int max=-1000001, min = 1000001;
+    
+        int i =0;
+    
+        while(i<size){
+            scanf("%d",&num[i]);
+            if(min>num[i])
+                min = num[i];
+            if(max<num[i])
+                max = num[i];
+            i++;
+        }
+    
+        printf("%d %d\n",min, max);
+        
+        return 0;
+    }
+</code>
+
+
+
+</pre>
+    <br>
+    <br>
+    <br>
+    </div> 
+
+    </div>
+
+</section>
+
+    
+</body>
+
+
