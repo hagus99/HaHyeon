@@ -143,7 +143,46 @@ deadlock이 안생길 수도 있는데 그것을 막는 방법이기 때문에 �
 
 
 
-<span class = "h">처리방법 2. Deadlock Avoidance</span>
+<span class = "h">처리방법 3. Dealock Detection and recovery</span>
+<code>
+        <strong>Deadlock Detection</strong>
+        - Resource type 당 single instance인 경우
+        : 자원할당 그래프에서의 cycle이 곧 deadlock을 의미
+        
+        - Resource type 당 multiple instance인 경우
+        : Banker's algorithm과 유사한 방법 활용
+
+        <strong>Wait-for graph 알고리즘</strong>
+        - Resource type 당 single instance인 경우
+        - Wait-for graph
+        : 자원 할당 그래프의 변형, 프로세스만으로 node 구성, 
+        : Pi가 가지고 있는 자원을 Pk가 기다리는 경우, Pk -> pi
+        - Algorithm
+        : Wait-for graph에 사이클이 존재하는지를 주기적으로 조사, O(n제곱)
+
+</code>
+
+<code>
+        <strong>Recovery</strong>
+        1. Process termination
+        - Abort all deadlocked processes
+        - Abort one process at a time until the deadlock cycle is eliminated
+
+        2. Resource preemption
+        - 비용을 최소화 할 victim의 선정
+        - safe state로 rollback하여 process를 restart
+        - Starvation 문제
+
+</code>
+
+
+<span class = "h">처리방법 4. Dealock Ignorance</span>
+Deadlock이 일어나지 않는다고 생각하고 아무런 조치도 취하지 않음
+
+    - Deadlock이 매우 드물게 발생하므로 deadlock에 대한 조치 자체가 더 큰 overhead일 수 있음
+    - 만약, 시스템에 deadlock이 발생한 경우 시스템이 비정상적으로 작동하는 것을 사람이 느낀 후 직접
+      process를 죽이는 등의 방법으로 대처
+    - UNIX, Windows 등 대부분의 범용 OS가 채택
 
 
 

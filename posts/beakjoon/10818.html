@@ -25,7 +25,7 @@
 
     <div id = "tag_list">
         <div class="l_title"><a href = "../../TIL.html">Self_Study</a></div><hr>
-        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[백준] 10818번 최소, 최대 값 구하기</div><div class="date">///////////</div></strong></a></div>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[백준] 10818번 최소, 최대 값 구하기</div><div class="date">2021.05.13</div></strong></a></div>
              <!--====content====-->
         <div class = "content">
         <br>    
@@ -42,31 +42,31 @@ N개의 정수가 주어진다. 이때, 최솟값과 최댓값을 구하는 프�
 첫째 줄에 주어진 정수 N개의 최솟값과 최댓값을 공백으로 구분해 출력한다.
 
 <code>
-    #include <stdio.h>
+        #include &lt;stdio.h&gt;<stdio .h=""></stdio>
 
-    int main()
-    {
-        int size = 0;
-        scanf("%d",&size);
-        int num[size];
-    
-        int max=-1000001, min = 1000001;
-    
-        int i =0;
-    
-        while(i<size){
-            scanf("%d",&num[i]);
-            if(min>num[i])
-                min = num[i];
-            if(max<num[i])
-                max = num[i];
-            i++;
-        }
-    
-        printf("%d %d\n",min, max);
+        int main()
+        {
+            int size = 0;
+            scanf(&quot;%d&quot;,&size);
+            int num[size];
         
-        return 0;
-    }
+            int max=-1000001, min = 1000001;
+        
+            int i =0;
+        
+            while(i<size){
+                scanf(&quot;%d&quot;,&num[i]);
+                if(min>num[i])
+                    min = num[i];
+                if(max<num[i])
+                    max = num[i];
+                i++;
+            }
+        
+            printf(&quot;%d %d\n&quot;,min, max);
+            
+            return 0;
+        }
 </code>
 
 
