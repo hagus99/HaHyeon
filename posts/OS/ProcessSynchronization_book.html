@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Process Synchronization 책 정리</title>
+        <link rel="stylesheet" type="text/css" href="../../css/pages.css">
+    </head>
+</html>
+
+<body>
+    <header>
+        <h3><a href = "../../index.html">HAGUS <br> HARDWARE</a></h3> 
+        <ul>
+            <li><a href ="../../index.html">ABOUT</a></li>
+            <li><a href ="../../TIL.html">TIL</a></li>
+            <li><a href ="../../tag.html">TAG</a></li>
+        </ul>
+    </header>
+
+    <section class="section">
+    <div id = "tag_menu">
+    </div>
+
+    <script src = "../../TIL_tag_menu.js"></script>
+
+    <div id = "tag_list">
+        <div class="l_title"><a href = "../../TIL.html">Class. </a></div><hr>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] Process Synchronization_쉽게 배우는 운영체제 책 정리 </div><div class="date">2020.05.13</div></strong></a></div>
+             <!--content-->
+        <div class = "content">
+        <br>
+        
+<pre>
+<span class="h">Critical Section (임계구역)</span>
+- 공유자원 접근 순서에 따라 실행 결과가 달라지는 프로그램의 영역
+- 전역변수를 사용할 때 뿐만 아니라 하드웨어 자원을 사용할 때도 적용되는 개념
+ex. 프린터 1개를 여러명이 동시에 사용하는 경우 프린터는 임계구역이 됨
+
+
+
+<span class="h">Critical Section 해결 조건</span>
+1. Mutual Exclusion (상호배제) : 임계구역에 한번에 하나의 프로세스만! 
+2. Bounded - waiting (한정대기) : 어떤 프로세스가 무한 대기 하면 안됨
+3. Progress flexibility (진행의 융통성) : 한 프로세스가 다른 프로세스의 진행을 방해해서는 안됨
+
+
+
+<span class="h">Critical Section 해결 방법 (소프트웨어적인 방법)</span>
+
+<strong style="background-color: lightgray;">Algorithm_01</strong>
+boolean lock = false; // 공유변수
+<div style="display: flex; ">
+<code style="margin-right: 50px; padding-right: 30px;">
+        <strong>P1</strong>
+
+        while(lock == true);
+        lock = true;
+
+        /* critical section */
+
+        lock = false;
+
+    </code>
+
+    <code style="padding-right: 30px;">
+        <strong>P2</strong>
+
+        while(lock == true);
+        lock = true;
+
+        /* critical section */
+
+        lock = false;
+
+    </code>
+</div>
+P1 while문 후에 lock = ture가 되고, cpu 타임아웃이 발생하여 P2 while문 후에 lock = true가 되면 
+P1, P2 둘다 critical section에 들어갈 수 있게 된다. 그러면 Mutual exclustion(상호배제)를 보장하지 못한다.
+
+<strong style="background-color: lightgray;">Algorithm_02</strong>
+위의 코드를 보완하여 Mutual exclusion문제를 해결하는 코드이다. 
+/* 공유 변수 선언 */
+boolean lock1 = false;
+boolean lock2 = false;
+<div style="display: flex; ">
+<code style="margin-right: 50px; padding-right: 30px;">
+        <strong>P1</strong>
+
+        lock1 = true;
+
+        while(lock2 == true);
+    
+        /* critical section */
+
+        lock1 = false;
+
+    </code>
+
+    <code style="padding-right: 30px;">
+        <strong>P2</strong>
+
+        lock2 = true;
+
+        while(lock1 == true);
+
+        /* critical section */
+
+        lock2 = false;
+
+    </code>
+</div>
+위의 코드의 경우는 Mutual exclusion 문제를 해결하지만 무한 대기 상황에 빠질 수 있다. 
+예를 들어 P1이 첫번째 줄을 실행하고 cpu타임아웃이 된후 P2를 실행하면 둘다 while문에서 빠져나오지 못하는 상황이 된다.
+-> 이런 경우를 Deadlock이라고 한다. 
+
+<strong style="background-color: lightgray;">Algorithm_03</strong>
+int lock = 1; // 공유변수
+<div style="display: flex; ">
+<code style="margin-right: 50px; padding-right: 30px;">
+        <strong>P1</strong>
+
+        while(lock == 2);
+    
+        /* critical section */
+
+        lock = 2;
+
+    </code>
+
+    <code style="padding-right: 30px;">
+        <strong>P2</strong>
+
+        while(lock == 1);
+
+        /* critical section */
+
+        lock = 1;
+
+    </code>
+</div>
+이 경우는 Mutual exclusion 문제와 bounded-waiting 문제를 해결! 
+하지만!!! 한 프로세스가 연달아 임계구역에 진입할 수 없다. 
+*프로세스 진행이 다른 프로세스로 인해 방해받는 현상을 lockstep synchronization(경직된 동기화)라고 한다. 
+
+
+
+<span class="h">Critical Section 해결 방법 (하드웨어적인 방법)</span>
+위의 Algorithm_01 에서 중간에 타임아웃으로 인하여 critical section에 프로세스 두 개가 들어갈 수 있는
+상황이 발생하는 것을 보았다. 이것에 대한 Solution으로 while(lock==true); 코드와 lock = true;
+이 코드 두개를 동시에 실행하면 해결할 수 있다! 
+-> 이것을 TestAndSet(TAS)이라고 부른다.
+
+TestAndSet 명령어는 일부 이스템에서 원자 명령어의 하나로, 읽기와 쓰기 모두를 제공한다. 
+<code>
+        // target을 검사하고, target 값을 true로 설정
+        boolean temp = *target){
+            boolean temp = *target; // 이전 값 기록
+            *target = true;
+            return temp;
+        }
+
+</code>
+
+<code>
+        <strong>lock을 사용한 상호배제</strong>
+
+        do 
+        {
+            while (TestAndSet(&lock)); // lock을 검사하여 true이면 대기, false이면 임계 영역에 진입
+
+            /* 임계 영역 */
+
+            lock false; // 다른 프로세스의 진입 허용 의미로 lock을 false로
+            
+            /* 나머지 영역 */
+        }while(true);
+
+</code>
+처음에는 lock을 false로 초기화했으므로 처음 실행한 프로세스는 첫 while문을 통과
+프로세스가 2개는 문제가 없지만, 여러 프로세스가 대기 중일 대 어떤 프로세스는 무한 대기 상태에 빠질 수 있으므로
+한정 대기 조건을 만족한다고 볼 수는 없다. 
+
+<code>
+        do
+        {
+            waiting[i] = true;
+            key = true;
+            while(waiting[i] && key)
+                key = TestAndSet(&lock);
+            waiting[i] = false;
+
+            /* critical section */
+            /* exit section */
+
+            j = (i+1) % n ;
+            while ((j != 1) && !waiting[j]) // 대기 중인 프로세스를 찾음
+                j = (j+1) % n ;
+            if(j = i)  // 대기 중인 프로세스가 없으면
+                lock = false;  // 다른 프로세스의 진입 허용
+            else  // 대기 프로세스가 있으면 다음 순서로 임계 영역에 진입
+                waiting[j] = false;  // Pj가 임계 영역에 진입할 수 있도록
+                // 나머지 영역
+        }while(true);
+
+</code>
+
+<code>
+        <strong>TestAndSet 명령어의 장점과 단점</strong>
+
+        <strong>장점</strong>
+            - 메인 메모리를 공유하는 다중 프로세서나 단일 프로세서에서 프로세스 수에 관계없이 적용할 수 있다.
+            - lock 변수 수에 상관없이 구현할 수 있다. 
+            - 구현이 단순하고 확인이 용이하다. 
+            - 다중 임계 영역을 지원한다. 
+
+        <strong>단점</strong>
+            - 바쁜 대기 발생
+            - 기아 상태 발생
+            - 교착 상태 발생
+        
+</code>
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+<span class = "h">상호 배제 방법들 요약</span>
+
+    1. 데커의 알고리즘 Dekker's algorithm
+    2. TestAndSet(TAS) 명령어
+    3. 세마포 Semaphore
+    4. 모니터 Monitor
+
+<code>
+        <strong>1. 데커의 알고리즘</strong>
+
+        // 프로세스가 공유하는 데이터 flag[] : boolean 배열, trun : 정수
+        flag[0] = false;
+        flag[1] = false;
+        turn = 0;  // 공유 변수, 0 또는 1
+
+        // 프로세스 P0 :                   // 프로세스 P0의 임계 영역 진입 절차
+        flag[0] = true;                  // P0의 임계 영역 진입 표시
+        while(flag[1] == true) {         // P1의 임계 영역 진입 여부 확인
+            if(turn == 1) {              // P1이 진입할 차례가 되면
+                flag[0] = false;         // 플래그를 재설정하여 P1에 진입 순서 양보
+                while (turn == 1) {      // turn을 바꿀 때까지 대기
+                    // 바쁜 대기
+                }
+                flag[0] = true;          // P1이 임계 영역에 재진입 시도
+            }
+        }
+
+        /* 임계 영역 */
+
+        turn = 1;             // P1에 진입 순서 제공
+        flag[0] = false;            // P0의 임계 영역 사용 완료 지정
+
+        /* 나머지 영역 */
+
+        // 프로세스 P1
+        flag[1] = true;
+        while (flag[0] == true) {
+            if(turn == 0){
+                flag[1] = false;
+                while(turn == 0){
+                    // 바쁜 대기
+                }
+                flag[1] = true;
+            }
+        }
+
+        /* 임계 영역 */
+
+        turn = 0;
+        flag[1] = false;
+
+        /* 나머지 영역 */
+
+</code>
+
+<code>
+        <strong>2. TestAndSet(TAS) 명령어</strong>
+
+        // target를 검사하고, target 값을 true로 설정
+        boolean TestAndSet (boolean *target) {
+            boolean temp = *temp;     // 이전 값 기록
+            *target = true;       // true로 설정
+            return temp;        //값 반환
+        }
+
+        do 
+        {
+            while(TestAndSet(&lock));     // lock을 검사하여 true이면 대기, false이면 임계 영역 진입
+            
+            /* 임계 영역 */
+
+            lock = false;              // 다른 프로세스의 진입 허용 의미로 lock을 false로
+
+            /* 나머지 영역 */
+        }while(true);
+
+</code>
+
+<code>
+        <strong>3. 세마포어 Semaphore</strong>
+
+
+
+</code>
+
+<code>
+        <strong>4. 모니터 Monitor</strong>
+
+
+
+</code>
+
+
+
+
+</pre>
+
+
+
+        <br>
+        <br>
+
+
+            
+        </div>
+
+    </div>
+
+</section>
+
+    
+</body>
+
+
