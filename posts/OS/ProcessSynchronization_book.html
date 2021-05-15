@@ -25,7 +25,7 @@
 
     <div id = "tag_list">
         <div class="l_title"><a href = "../../TIL.html">Class. </a></div><hr>
-        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] Process Synchronization_쉽게 배우는 운영체제 책 정리 </div><div class="date">2020.05.13</div></strong></a></div>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] Process Synchronization_책 정리 </div><div class="date">2020.05.13</div></strong></a></div>
              <!--content-->
         <div class = "content">
         <br>
@@ -304,16 +304,117 @@ TestAndSet 명령어는 일부 이스템에서 원자 명령어의 하나로, �
 <code>
         <strong>3. 세마포어 Semaphore</strong>
 
+        <strong>정의</strong>
+        P(S) : wait(S) {               // S = 1로 초기화
+            while S <=  0
+                ;                // 바쁜 대기, S>0 때까지 대기
+        }
 
+        V(S) : Signal(S) {
+            S++;           // 다른 프로세스의 접근 허용
+        }
+
+        <strong>프로세스 Pn</strong>
+        do{
+            wait(mutex);
+
+            /* 임계 영역 */
+
+            signal(mutex);
+
+            /* 나머지 영역 */
+
+        }while(1);
+
+        <strong>종류</strong>
+
+        - 이진 세마포 binary semaphore
+        - 계수 세마포 counting semahpore
 
 </code>
+
+앞서 살펴본 상호배제의 해결과 세마포의 단점은 바쁜 대기 요구로 한 프로세스가 임계 영역에 있으면 이 임계 영역에 
+들어가려는 프로세스는 진입 코드에서 계속 순환하기에 프로세서 시간을 낭비한다. 세마포의 wait와 signal 연산을
+수정하면 바쁜 대기 요구를 극복할 수 있다. 바쁜 대기 대신에 프로세스 자체를 중단 할 수 있다. 세마포와 관련된
+큐로 프로세스를 배치하므로 프로세스는 대기 상태로 전환한다. signal 연산은 준비 큐에서 프로세스 하나를 꺼내 
+그 프로세스를 시작한다. 
+
+<code>
+        <strong>세마포의 구조</strong>
+        struct semaphore {
+            int count;
+            queueType queue;
+        };
+
+        semaphore S;
+
+        <strong>세마포의 연산</strong>
+        wait(S) {
+            S -> count--;
+            if (S->count < 0) {
+                remove a process P from S->queue;     // 준비 큐에서 P 프로세스를 제거
+                wakeup(P);                 // 신호를 보내 프로세스를 실행
+            }
+        }
+
+</code>
+
+프로세스 준비 큐는 각 PCB(프로세스 제어 블록)의 링크 필드 정보를 이용하여 쉽게 구현할 수 있다. 각 세마포는
+정수 값과 PCB 등 열 포인터를 포함한다. 준비 큐에서 프로세스를 추가, 제거하는 가장 간단한 방법은 FIFO 큐를
+사용하는 것이다. 
+
+세마포의 주요 특징은 원자(단위)적으로 수행한다는 것이다. 두 프로세스가 동시에 동일한 세마포에서 wait과
+signal 연산을 할 수 없도록 해야 한다.
 
 <code>
         <strong>4. 모니터 Monitor</strong>
 
+        <strong>Ex. 단일 자원을 할당하는 모니터</strong>
+        monitor resource_allocator {
+            condition is_free;
+            int in_use = 0;
+
+            get_resource() {
+                if(in_use)
+                    wait(is_free);      // 프로세스 중단 (일시정지)
+                in_use = 1;
+            }
+
+            return_resorce() {
+                in_use = 0;
+                signal (is_free);     // 대기 중인 프로세스에 할당 허용 (신호)
+            }
+        }
+
 
 
 </code>
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+<span class = "h">용어&개념 정리</span>
+
+<strong>Race Condition</strong>
+
+경쟁상태, 여러 프로세스가 동시에 공유 데이터에 접근 할 때 접근 순서에 따라 실행 결과가 달라지는 상황
+
+<strong>상호배제 방법</strong>
+
+1. 데커의 알고리즘 Dekker's algorithm : 병행 프로그래밍의 상호배제 문제를 풀 수 있는 첫 번째 해결책으로,
+두 프로세스가 서로 통신하려고 공유 메모리를 사용하여 충돌 없이 단일 자원을 공유할 수 있도록 허용한다. 
+
+2. TestAndSet(TAS) : 소프트웨어적인 해결책은 더 복잡하고, 프로세스가 2개 이상 일 때는 더 많이 대기 할 수 
+있다. 이때 기계를 비교하거나 단어 내용을 검사, 수정하는 특별한 하드웨어 명령어 (TestAndSet)를 사용하여
+간단한 방법으로 임계 영역 문제를 해결 할 수 있다. 
+
+3. 세마포어 Semaphore : 상호배제의 해결책에는 바쁜 대기로 프로세스를 낭비한다는 단점이 있다. 다익스트라는 1965년
+진입 조건을 반복 조사하지 않고 true일 때 프로세스 상태를 확인하는 새로운 동기화 도구인 세마포를 제안하여 이 문제를
+해결했다. 세마포는 상호배제에 사용할 뿐만 아니라 다양한 연산의 순서도 제공한다. 
+-> 바쁜 대기를 하지 않고 프로세스 자체를 중단 시켜 세마포어 큐에 프로세스를 넣어 대기시킨다. 
+
+4. 모니터 Monitor : 세마포를 잘못 사용하면 여러 가지 오류가 쉽게 발생하여 프로그램을 작성하기가 어렵다. 이런 단점을
+극복하려고 모니터가 등장했다. 핸슨이 제안하고 호가 수정한 공유 자원과 이것의 임계 영역을 관리하는 소프트웨어 구성체,
+즉 병행 프로그래밍 구조이다. 
 
 
 
