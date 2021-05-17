@@ -79,6 +79,7 @@ ul li{
     margin-top:5px;
     margin-left: 20px;
     padding: 0px;
+    cursor:pointer;
 }
 
 a{
