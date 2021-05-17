@@ -42,42 +42,44 @@ N개의 정수가 주어진다. 이때, 최솟값과 최댓값을 구하는 프�
 첫째 줄에 주어진 정수 N개의 최솟값과 최댓값을 공백으로 구분해 출력한다.
 
 <code>
-        #include &lt;stdio.h&gt;<stdio .h=""></stdio>
+<xmp>           #include <stdio.h>
 
-        int main()
-        {
-            int size = 0;
-            scanf(&quot;%d&quot;,&size);
-            int num[size];
-        
-            int max=-1000001, min = 1000001;
-        
-            int i =0;
-        
-            while(i<size){
-                scanf(&quot;%d&quot;,&num[i]);
-                if(min>num[i])
-                    min = num[i];
-                if(max<num[i])
-                    max = num[i];
-                i++;
-            }
-        
-            printf(&quot;%d %d\n&quot;,min, max);
+            int main()
+            {
+                scanf(&quot;%d&quot;,&size);
+                int num[size];
             
-            return 0;
-        }
+                int max=-1000001, min = 1000001;
+            
+                int i =0;
+            
+                while(i<size){
+                    scanf("%d",&num[i]);
+                    if(min>num[i])
+                        min = num[i];
+                    if(max<num[i])
+                        max = num[i];
+                    i++;
+                }
+            
+                printf("%d %d\n",min, max);
+                
+                return 0;
+            }
+</xmp>
 </code>
-
-
-
 </pre>
+
+
+
     <br>
     <br>
     <br>
     </div> 
 
     </div>
+
+    
 
 </section>
 
