@@ -37,4 +37,13 @@ function Mmagazine(event){
 }
 
 
+let project = document.createElement('li');
+project.textContent = 'H.Project';
+topmenu.appendChild(project);
+project.addEventListener('click',Mproject);
+function Mproject(event){
+    window.location.href=""
+}
+
+
 console.log(topmenu.innerHTML);
