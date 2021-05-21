@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Memory Allocation</title>
+        <link rel="stylesheet" type="text/css" href="../../css/pages.css">
+    </head>
+</html>
+
+<body>
+    <header>
+        <h3><a href = "../../index.html">HAGUS <br> HARDWARE</a></h3> 
+        <ul id="main_menu">
+        </ul>
+
+        <script src = "../../MainMenu.js"></script>
+    </header>
+
+    <section class="section">
+    <div id = "tag_menu">
+    </div>
+
+    <script src = "../../TIL_tag_menu.js"></script>
+
+    <div id = "tag_list">
+        <div class="l_title"><a href = "../../TIL.html">Class. </a></div><hr>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] Memory Allocation - Continuous memory allocation (연속할당) </div><div class="date">2020.05.22</div></strong></a></div>
+             <!--content-->
+        <div class = "content">
+        <br>
+<pre>
+<span class = "h">Continuous Memory Allocation (연속 할당)</span>
+
+<strong>정의</strong>
+프로세스(context)를 하나의 연속된 메모리 공간에 할당하는 정책(프로그램, 데이터, 스택 등)
+
+<strong>메모리 구성 정책</strong>
+1. 메모리에 동시에 올라갈 수 있는 프로세스 수 (Multiprogramming degree)
+2. 각 프로세스에게 할당되는 메모리 공간 크기
+3. 메모리 분할 방법
+
+<span class="h">Uni-programming</span>
+
+  • Multiprogramming degree = 1
+  • 프로세스가 메모리에 한 개만 올라간다는 뜻
+  • 가장 간단한 메모리 관리 기법
+
+<code>
+        <strong>문제점</strong>
+        1. 프로그램의 크기 > 메모리 크기
+        2. 커널(kernel) 보호
+        3. Low system resource utilization / Low system performance
+
+        <strong>해결법</strong>
+        1.
+            Overlay structure
+            메모리에 현재 필요한 영역만 적재
+            사용자가 프로그램의 흐름 및 자료구조를 모두 알고 있어야 함
+        2. 
+            경계 레지스터 (boundary register) 사용
+        3. 
+            Multi-programming (여러 프로세스를 메모리에 올리기)
+
+</code>
+
+
+
+<span class="h">Multi-programming</span>
+
+<strong>1. Fixed partition (FPM)</strong>
+
+  • 메모리 공간을 고정된 크기로 분할 (미리 분할되어 있음)
+  • 각 프로세스는 하나의 partition(분할)에 적재 (Process:Partition = 1:1)
+  • partition의 수 = K (Multiprogramming degree = K)
+
+  * 각 partition의 경계와 kernel을 보호해야 하기 때문에 각 파티션 마다 boundary register를 두어야 한다. 
+
+<code>
+        <strong>! Fragmentation(단편화) !</strong>
+
+        <strong>Internal fragmentation</strong>
+        • 내부 단편화
+        • Partition 크기 > Process 크기 (메모리 낭비 됨)
+
+        <strong>External fragmentation</strong>
+        • 외부 단편화
+        • (남은 메모리 크기 > Process 크기)지만, 연속된 공간이 아님 (메모리가 낭비 됨)
+
+</code>
+
+<code>
+        <strong>요약</strong>
+
+        • 고정된 크기로 메모리 미리 분할
+        • 메모리 관리가 간편함 (Low overhead)
+        • 시스템 자원이 낭비 될 수 있음(internal/external fragmentation) ! 중요 !
+
+</code>
+
+<strong>2. Variable partition (VPM)</strong>
+fragmentation 문제를 해결 할 수 있는 variable partition Multiprogramming
+
+  • 초기에는 전체가 하나의 영역
+  • 프로세스를 처리하는 과정에서 메모리 공간이 동적으로 분할
+  • No internal fragmentation 
+
+<code>
+        <strong>Placement strategies (배치 전략)</strong>
+
+        1. First-fit (최초 적합)
+           • 충분한 크기를 가진 첫 번째 partition을 선택
+           • simple and low overhead
+           • 공간 활용률이 떨어질 수 있음
+        
+        2. Best-fit (최적 적합)
+           • precess가 들어갈 수 있는 partition 중 가장 작은 곳 선택
+           • 탐색시간이 오래 걸림 (모든 partition을 살펴봐야 함)
+           • 크기가 큰 partition을 유지 할 수 있음
+           • 작은 크기의 partitiondl 많이 발생(활용하기 너무 작음)
+
+        3. Worst-fit (최악 적합)
+           • Process가 들어갈 수 있는 partiton 중 가장 큰 곳 선택
+           • 탐색시간이 오래 걸림 (모든 partition을 살펴봐야 함)
+           • 작은 크기의 partition 발생을 줄일 수 있음
+           • 큰 그기의 partition 확보가 어려움 (큰 프로세스에게 필요한)
+        
+        4. Next-fit (순차 최초 적합)
+           • 최초 적합 전략과 유사
+           • state table에서 마지막으로 탐색한 위치부터 탐색
+           • 메모리 영역의 사용 빈도 균등화
+           • Low overhead 
+
+</code>
+
+<code>
+        <strong>External fragmentation issue</strong>
+
+        1. Coalescing holes (공간 통합)
+           • 인접한 빈 영역을 하나의 partition으로 통합
+           • process가 memory를 release하고 나가면 수행
+           • Low overhead
+
+        2. Storage Compaction (메모리 압축)
+           • 모든 빈 공간을 하나로 통합
+           • 프로세스 처리에 필요한 적재 공간 확보가 필요할 때 수행
+           • High overhead
+           -> 모든 process 재배치 (process 중지) , 많은 시스템 자원을 소비 
+
+</code> 
+
+
+
+<span class ="h">Continuous Memory Allocation 전체 요약</span>
+
+    1. Uni-Programming
+        • Simple
+        • Fragmentation Problem
+
+    2. Fixed partition multi-programming (FPM)
+
+    3. Variable partition multi-programming (VPM)
+        • Placement strategies (First-fit, Best-fit, Worst-fit, Next-fit)
+        • External fragmentation issue (Coalescing holes, Storage compaction) 
+
+</pre>  
+            
+        </div>
+
+    </div>
+
+</section>
+
+    
+</body>
+
+

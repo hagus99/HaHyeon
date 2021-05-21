@@ -103,7 +103,7 @@ ul li{
     margin-top: 10px;
 }
 
-.tag_list div{
+#tag_list div{
     display: flex;
     flex-wrap:nowrap;
     font-size: small;
