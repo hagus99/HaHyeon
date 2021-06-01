@@ -116,11 +116,21 @@ h4{
         flex-direction: column;
         justify-content:center;
         align-items : center;
-        margin-top:100px;
+    }
+
+    header h3{
+        margin-top: 260px;
+        margin-bottom: 10px;
+    }
+
+    header ul{
+        text-align: center;
+        margin-right: 45px;
+        margin-top: 0px;
     }
 
     ul li{
-        margin-left: 0;
-        margin-right: 20px;
+        margin-right:5px;
+        margin-left: 5px;
     }
 }

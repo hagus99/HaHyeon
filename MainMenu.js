@@ -6,7 +6,7 @@ about.textContent = 'ABOUT';
 topmenu.appendChild(about);
 about.addEventListener('click',Mabout);
 function Mabout(event){
-    window.location.href="https://hagus99.github.io/HaHyeon/index.html"
+    window.location.href="https://hagus99.github.io/HaHyeon/about.html"
 }
 
 
