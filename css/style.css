@@ -110,7 +110,7 @@ h4{
 
 @media all and (max-width: 480px){
     #profile {display : none;}
-    .slider {display : none;}
+    #slider_img {display : none;}
     header{
         display: flex;
         flex-direction: column;
