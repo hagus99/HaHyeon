@@ -94,8 +94,7 @@ ul li{
     display: inline-flex;
     flex-direction: column;
     width: 700px;
-    margin-left: 40px;
-   
+    margin-left: 40px; 
 }   
 
 .l_title{
@@ -171,3 +170,92 @@ img{
     border: 4px solid lightgray;
 }
 
+
+@media all and (max-width: 480px){
+    body{
+        width : 100%;
+        height:100%;
+        margin-left: 0px;
+    }
+
+    hr{
+        display: block;
+        width: 100%;
+    }
+
+    section{
+        clear:both;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-top: 0px;
+    }
+
+    h3{
+        font-size: 11px;
+    }
+
+    header{
+        margin-top: 15px;
+        margin-left: 20px;
+    }
+
+    ul li{
+        margin-top: 7px;
+        margin-left: 0px;
+        margin-right:10px;
+        font-size: 11.5px;
+    }
+
+
+    #tag_menu{
+        display: flex;
+        flex-direction: row;
+        min-width: 100px;
+        margin-left: 20px;
+        margin-top:0px;
+        margin-bottom : 10px;
+        height: 30px;
+    }
+
+    #tag_menu button{
+        background-color : #EEEEEE;
+        border:none;
+        color: gray;
+        text-decoration: none;
+        display: block;
+        font-size: 16px;
+        font-size: small;
+        margin-bottom: 10px;
+        margin-right: 15px;
+        padding: 0 20px;
+        text-align: left;
+        cursor:pointer;
+        border-radius: 12px;
+        font-size: x-small;
+    }
+
+    #tag_list{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: 20px;
+        flex-shrink: 1;
+    } 
+
+    #tag_list div{
+        display: flex;
+        flex-wrap:wrap;
+        font-size: small;
+    }
+    
+    .l_subtitle{
+        display: flex;
+        flex-direction: row;
+        flex-wrap:wrap;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        flex-shrink: 1;
+    }
+
+}
