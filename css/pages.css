@@ -165,8 +165,8 @@ p{
     margin-left: 10px;
 }
 
-img{
-    width: 500px;
+img .os{
+    width: 80%;
     border: 4px solid lightgray;
 }
 
@@ -178,6 +178,11 @@ img{
         margin-left: 0px;
         min-width: 0px;
         padding: 0 10px;
+        overflow-x: hidden;
+    }
+
+    html {
+        overflow-x: hidden;
     }
 
     hr{
@@ -278,6 +283,16 @@ img{
 
     #tag_list .date{
         display: none;
+    }
+
+    #tag_list .content{
+        font-size: small;
+        line-height: 160%;
+        display: block;
+        white-space: normal;
+    }
+    img{
+        width: 80%;
     }
 
 }

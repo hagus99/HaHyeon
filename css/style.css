@@ -110,6 +110,10 @@ h4{
 }
 
 @media all and (max-width: 480px){
+    html {
+        overflow-x: hidden;
+    }
+
     #profile {display : none;}
     #slider_img {display : none;}
     .slider {
