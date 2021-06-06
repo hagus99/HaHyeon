@@ -7,7 +7,7 @@ Class.textContent = '#Class';
 Class.addEventListener('click',MClass);
 
 function MClass(event){
-    window.location.href="file:///Users/hahyeon/Desktop/CHEESE/Hahyeon/TIL.html#class"
+    window.location.href="https://hagus99.github.io/HaHyeon/TIL.html#Class"
 }
 
 menu.appendChild(Class);
@@ -18,7 +18,7 @@ Study.textContent = '#Study';
 Study.addEventListener('click',MStudy);
 
 function MStudy(event){
-    window.location.href="file:///Users/hahyeon/Desktop/CHEESE/Hahyeon/TIL.html#study"
+    window.location.href="https://hagus99.github.io/HaHyeon/TIL.html#Study"
 }
 menu.appendChild(Study);
 
@@ -28,7 +28,7 @@ Language.textContent = '#Language';
 Language.addEventListener('click',MLanguage);
 
 function MLanguage(event){
-    window.location.href="file:///Users/hahyeon/Desktop/CHEESE/Hahyeon/TIL.html#language"
+    window.location.href="https://hagus99.github.io/HaHyeon/TIL.html#Language"
 }
 
 menu.appendChild(Language);
