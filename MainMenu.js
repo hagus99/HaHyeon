@@ -42,7 +42,7 @@ project.textContent = 'H.Project';
 topmenu.appendChild(project);
 project.addEventListener('click',Mproject);
 function Mproject(event){
-    window.location.href="";
+    window.location.href="https://hagus99.github.io/HaHyeon/project.html";
 }
 
 
