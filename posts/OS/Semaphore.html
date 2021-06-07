@@ -149,12 +149,7 @@
         <span class = "h">Which is better?</span><br>
         <br>
         <strong>Busy-wait vs. Block/Wakeup</strong><br>
-        보통은 block & wakeup을 쓰는 것이 효율적이다. 쓸데없이 cpu를 계속 쓰면서 기다릴 필요 없이<br>
-        cpu를 반납하고 block된 상태로 들어가는 것이 cpu의 이용률이 높아진다. <br>
-        그렇지만 굳이 나누어 보자면 block/wakeup도 overhead가 있다. <br>
-        Critical section의 길이가 짧은 경우, Busy-wait를 써도 문제 없다. <br>
-        Critical section의 길이가 긴 경우, cpu의 사용 시간이 길어지기 때문에 Block/wakeup이 적당하다.<br>
-        일반적으로는 block/wakeup이 좋음<br>
+        보통은 block & wakeup을 쓰는 것이 효율적이다. 쓸데없이 cpu를 계속 쓰면서 기다릴 필요 없이 cpu를 반납하고 block된 상태로 들어가는 것이 cpu의 이용률이 높아진다. 그렇지만 굳이 나누어 보자면 block/wakeup도 overhead가 있다. Critical section의 길이가 짧은 경우, Busy-wait를 써도 문제 없다. Critical section의 길이가 긴 경우, cpu의 사용 시간이 길어지기 때문에 Block/wakeup이 적당하다. 일반적으로는 block/wakeup이 좋음<br>
         <br>
         <br>
         <br>
