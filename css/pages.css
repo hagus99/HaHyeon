@@ -175,7 +175,7 @@ img{
 }
 
 pre{
-    white-space: pre-line;
+    white-space: pre-wrap;
 }
 
 code{
@@ -314,7 +314,7 @@ code{
     }
 
     pre{
-        white-space: pre-line;
+        white-space: pre-wrap;
         padding: 0 3px;
     }
     code{

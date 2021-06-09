@@ -51,26 +51,26 @@ ex. 프린터 1개를 여러명이 동시에 사용하는 경우 프린터는 �
 boolean lock = false; // 공유변수
 <div style="display: flex; ">
 <code style="margin-right: 50px; padding-right: 30px;">
-        <strong>P1</strong>
+<strong>P1</strong>
 
-        while(lock == true);
-        lock = true;
+while(lock == true);
+lock = true;
 
-        /* critical section */
+/* critical section */
 
-        lock = false;
+lock = false;
 
-    </code>
+</code>
 
-    <code style="padding-right: 30px;">
-        <strong>P2</strong>
+<code style="padding-right: 30px;">
+<strong>P2</strong>
 
-        while(lock == true);
-        lock = true;
+while(lock == true);
+lock = true;
 
-        /* critical section */
+/* critical section */
 
-        lock = false;
+lock = false;
 
     </code>
 </div>
@@ -84,28 +84,28 @@ boolean lock1 = false;
 boolean lock2 = false;
 <div style="display: flex; ">
 <code style="margin-right: 50px; padding-right: 30px;">
-        <strong>P1</strong>
+<strong>P1</strong>
 
-        lock1 = true;
+lock1 = true;
 
-        while(lock2 == true);
-    
-        /* critical section */
+while(lock2 == true);
 
-        lock1 = false;
+/* critical section */
+
+lock1 = false;
 
     </code>
 
     <code style="padding-right: 30px;">
-        <strong>P2</strong>
+<strong>P2</strong>
 
-        lock2 = true;
+lock2 = true;
 
-        while(lock1 == true);
+while(lock1 == true);
 
-        /* critical section */
+/* critical section */
 
-        lock2 = false;
+lock2 = false;
 
     </code>
 </div>
@@ -117,24 +117,24 @@ boolean lock2 = false;
 int lock = 1; // 공유변수
 <div style="display: flex; ">
 <code style="margin-right: 50px; padding-right: 30px;">
-        <strong>P1</strong>
+<strong>P1</strong>
 
-        while(lock == 2);
-    
-        /* critical section */
+while(lock == 2);
 
-        lock = 2;
+/* critical section */
+
+lock = 2;
 
     </code>
 
     <code style="padding-right: 30px;">
-        <strong>P2</strong>
+<strong>P2</strong>
 
-        while(lock == 1);
+while(lock == 1);
 
-        /* critical section */
+/* critical section */
 
-        lock = 1;
+lock = 1;
 
     </code>
 </div>
@@ -152,70 +152,70 @@ int lock = 1; // 공유변수
 
 TestAndSet 명령어는 일부 이스템에서 원자 명령어의 하나로, 읽기와 쓰기 모두를 제공한다. 
 <code>
-        // target을 검사하고, target 값을 true로 설정
-        boolean temp = *target){
-            boolean temp = *target; // 이전 값 기록
-            *target = true;
-            return temp;
-        }
+// target을 검사하고, target 값을 true로 설정
+boolean temp = *target){
+    boolean temp = *target; // 이전 값 기록
+    *target = true;
+    return temp;
+}
 
 </code>
 
 <code>
-        <strong>lock을 사용한 상호배제</strong>
+<strong>lock을 사용한 상호배제</strong>
 
-        do 
-        {
-            while (TestAndSet(&lock)); // lock을 검사하여 true이면 대기, false이면 임계 영역에 진입
+do 
+{
+    while (TestAndSet(&lock)); // lock을 검사하여 true이면 대기, false이면 임계 영역에 진입
 
-            /* 임계 영역 */
+    /* 임계 영역 */
 
-            lock false; // 다른 프로세스의 진입 허용 의미로 lock을 false로
-            
-            /* 나머지 영역 */
-        }while(true);
+    lock false; // 다른 프로세스의 진입 허용 의미로 lock을 false로
+    
+    /* 나머지 영역 */
+}while(true);
 
 </code>
 처음에는 lock을 false로 초기화했으므로 처음 실행한 프로세스는 첫 while문을 통과
 프로세스가 2개는 문제가 없지만, 여러 프로세스가 대기 중일 대 어떤 프로세스는 무한 대기 상태에 빠질 수 있으므로 한정 대기 조건을 만족한다고 볼 수는 없다. 
 
 <code>
-        do
-        {
-            waiting[i] = true;
-            key = true;
-            while(waiting[i] && key)
-                key = TestAndSet(&lock);
-            waiting[i] = false;
+do
+{
+    waiting[i] = true;
+    key = true;
+    while(waiting[i] && key)
+        key = TestAndSet(&lock);
+    waiting[i] = false;
 
-            /* critical section */
-            /* exit section */
+    /* critical section */
+    /* exit section */
 
-            j = (i+1) % n ;
-            while ((j != 1) && !waiting[j]) // 대기 중인 프로세스를 찾음
-                j = (j+1) % n ;
-            if(j = i)  // 대기 중인 프로세스가 없으면
-                lock = false;  // 다른 프로세스의 진입 허용
-            else  // 대기 프로세스가 있으면 다음 순서로 임계 영역에 진입
-                waiting[j] = false;  // Pj가 임계 영역에 진입할 수 있도록
-                // 나머지 영역
-        }while(true);
+    j = (i+1) % n ;
+    while ((j != 1) && !waiting[j]) // 대기 중인 프로세스를 찾음
+        j = (j+1) % n ;
+    if(j = i)  // 대기 중인 프로세스가 없으면
+        lock = false;  // 다른 프로세스의 진입 허용
+    else  // 대기 프로세스가 있으면 다음 순서로 임계 영역에 진입
+        waiting[j] = false;  // Pj가 임계 영역에 진입할 수 있도록
+        // 나머지 영역
+}while(true);
 
 </code>
 
 <code>
-        <strong>TestAndSet 명령어의 장점과 단점</strong>
+<strong>TestAndSet 명령어의 장점과 단점</strong>
 
-        <strong>장점</strong>
-            - 메인 메모리를 공유하는 다중 프로세서나 단일 프로세서에서 프로세스 수에 관계없이 적용할 수 있다.
-            - lock 변수 수에 상관없이 구현할 수 있다. 
-            - 구현이 단순하고 확인이 용이하다. 
-            - 다중 임계 영역을 지원한다. 
+<strong>장점</strong>
+    - 메인 메모리를 공유하는 다중 프로세서나 단일 프로세서에서 프로세스 수에 관계없이 적용할 수 있다.
+    - lock 변수 수에 상관없이 구현할 수 있다. 
+    - 구현이 단순하고 확인이 용이하다. 
+    - 다중 임계 영역을 지원한다. 
 
-        <strong>단점</strong>
-            - 바쁜 대기 발생
-            - 기아 상태 발생
-            - 교착 상태 발생
+<strong>단점</strong>
+    - 바쁜 대기 발생
+    - 기아 상태 발생
+    - 교착 상태 발생
         
 </code>
 
@@ -229,105 +229,105 @@ TestAndSet 명령어는 일부 이스템에서 원자 명령어의 하나로, �
     4. 모니터 Monitor
 
 <code>
-        <strong>1. 데커의 알고리즘</strong>
+<strong>1. 데커의 알고리즘</strong>
 
-        // 프로세스가 공유하는 데이터 flag[] : boolean 배열, trun : 정수
-        flag[0] = false;
-        flag[1] = false;
-        turn = 0;  // 공유 변수, 0 또는 1
+// 프로세스가 공유하는 데이터 flag[] : boolean 배열, trun : 정수
+flag[0] = false;
+flag[1] = false;
+turn = 0;  // 공유 변수, 0 또는 1
 
-        // 프로세스 P0 :                   // 프로세스 P0의 임계 영역 진입 절차
-        flag[0] = true;                  // P0의 임계 영역 진입 표시
-        while(flag[1] == true) {         // P1의 임계 영역 진입 여부 확인
-            if(turn == 1) {              // P1이 진입할 차례가 되면
-                flag[0] = false;         // 플래그를 재설정하여 P1에 진입 순서 양보
-                while (turn == 1) {      // turn을 바꿀 때까지 대기
-                    // 바쁜 대기
-                }
-                flag[0] = true;          // P1이 임계 영역에 재진입 시도
-            }
+// 프로세스 P0 :                   // 프로세스 P0의 임계 영역 진입 절차
+flag[0] = true;                  // P0의 임계 영역 진입 표시
+while(flag[1] == true) {         // P1의 임계 영역 진입 여부 확인
+    if(turn == 1) {              // P1이 진입할 차례가 되면
+        flag[0] = false;         // 플래그를 재설정하여 P1에 진입 순서 양보
+        while (turn == 1) {      // turn을 바꿀 때까지 대기
+            // 바쁜 대기
         }
+        flag[0] = true;          // P1이 임계 영역에 재진입 시도
+    }
+}
 
-        /* 임계 영역 */
+/* 임계 영역 */
 
-        turn = 1;             // P1에 진입 순서 제공
-        flag[0] = false;            // P0의 임계 영역 사용 완료 지정
+turn = 1;             // P1에 진입 순서 제공
+flag[0] = false;            // P0의 임계 영역 사용 완료 지정
 
-        /* 나머지 영역 */
+/* 나머지 영역 */
 
-        // 프로세스 P1
+// 프로세스 P1
+flag[1] = true;
+while (flag[0] == true) {
+    if(turn == 0){
+        flag[1] = false;
+        while(turn == 0){
+            // 바쁜 대기
+        }
         flag[1] = true;
-        while (flag[0] == true) {
-            if(turn == 0){
-                flag[1] = false;
-                while(turn == 0){
-                    // 바쁜 대기
-                }
-                flag[1] = true;
-            }
-        }
+    }
+}
 
-        /* 임계 영역 */
+/* 임계 영역 */
 
-        turn = 0;
-        flag[1] = false;
+turn = 0;
+flag[1] = false;
 
-        /* 나머지 영역 */
+/* 나머지 영역 */
 
 </code>
 
 <code>
-        <strong>2. TestAndSet(TAS) 명령어</strong>
+<strong>2. TestAndSet(TAS) 명령어</strong>
 
-        // target를 검사하고, target 값을 true로 설정
-        boolean TestAndSet (boolean *target) {
-            boolean temp = *temp;     // 이전 값 기록
-            *target = true;       // true로 설정
-            return temp;        //값 반환
-        }
+// target를 검사하고, target 값을 true로 설정
+boolean TestAndSet (boolean *target) {
+    boolean temp = *temp;     // 이전 값 기록
+    *target = true;       // true로 설정
+    return temp;        //값 반환
+}
 
-        do 
-        {
-            while(TestAndSet(&lock));     // lock을 검사하여 true이면 대기, false이면 임계 영역 진입
-            
-            /* 임계 영역 */
+do 
+{
+    while(TestAndSet(&lock));     // lock을 검사하여 true이면 대기, false이면 임계 영역 진입
+    
+    /* 임계 영역 */
 
-            lock = false;              // 다른 프로세스의 진입 허용 의미로 lock을 false로
+    lock = false;              // 다른 프로세스의 진입 허용 의미로 lock을 false로
 
-            /* 나머지 영역 */
-        }while(true);
+    /* 나머지 영역 */
+}while(true);
 
 </code>
 
 <code>
-        <strong>3. 세마포어 Semaphore</strong>
+<strong>3. 세마포어 Semaphore</strong>
 
-        <strong>정의</strong>
-        P(S) : wait(S) {               // S = 1로 초기화
-            while S <=  0
-                ;                // 바쁜 대기, S>0 때까지 대기
-        }
+<strong>정의</strong>
+P(S) : wait(S) {               // S = 1로 초기화
+    while S <=  0
+        ;                // 바쁜 대기, S>0 때까지 대기
+}
 
-        V(S) : Signal(S) {
-            S++;           // 다른 프로세스의 접근 허용
-        }
+V(S) : Signal(S) {
+    S++;           // 다른 프로세스의 접근 허용
+}
 
-        <strong>프로세스 Pn</strong>
-        do{
-            wait(mutex);
+<strong>프로세스 Pn</strong>
+do{
+    wait(mutex);
 
-            /* 임계 영역 */
+    /* 임계 영역 */
 
-            signal(mutex);
+    signal(mutex);
 
-            /* 나머지 영역 */
+    /* 나머지 영역 */
 
-        }while(1);
+}while(1);
 
-        <strong>종류</strong>
+<strong>종류</strong>
 
-        - 이진 세마포 binary semaphore
-        - 계수 세마포 counting semahpore
+- 이진 세마포 binary semaphore
+- 계수 세마포 counting semahpore
 
 </code>
 
@@ -338,22 +338,22 @@ TestAndSet 명령어는 일부 이스템에서 원자 명령어의 하나로, �
 그 프로세스를 시작한다. 
 
 <code>
-        <strong>세마포의 구조</strong>
-        struct semaphore {
-            int count;
-            queueType queue;
-        };
+<strong>세마포의 구조</strong>
+struct semaphore {
+    int count;
+    queueType queue;
+};
 
-        semaphore S;
+semaphore S;
 
-        <strong>세마포의 연산</strong>
-        wait(S) {
-            S -> count--;
-            if (S->count < 0) {
-                remove a process P from S->queue;     // 준비 큐에서 P 프로세스를 제거
-                wakeup(P);                 // 신호를 보내 프로세스를 실행
-            }
-        }
+<strong>세마포의 연산</strong>
+wait(S) {
+    S -> count--;
+    if (S->count < 0) {
+        remove a process P from S->queue;     // 준비 큐에서 P 프로세스를 제거
+        wakeup(P);                 // 신호를 보내 프로세스를 실행
+    }
+}
 
 </code>
 
@@ -362,24 +362,24 @@ TestAndSet 명령어는 일부 이스템에서 원자 명령어의 하나로, �
 세마포의 주요 특징은 원자(단위)적으로 수행한다는 것이다. 두 프로세스가 동시에 동일한 세마포에서 wait과 signal 연산을 할 수 없도록 해야 한다.
 
 <code>
-        <strong>4. 모니터 Monitor</strong>
+<strong>4. 모니터 Monitor</strong>
 
-        <strong>Ex. 단일 자원을 할당하는 모니터</strong>
-        monitor resource_allocator {
-            condition is_free;
-            int in_use = 0;
+<strong>Ex. 단일 자원을 할당하는 모니터</strong>
+monitor resource_allocator {
+    condition is_free;
+    int in_use = 0;
 
-            get_resource() {
-                if(in_use)
-                    wait(is_free);      // 프로세스 중단 (일시정지)
-                in_use = 1;
-            }
+    get_resource() {
+        if(in_use)
+            wait(is_free);      // 프로세스 중단 (일시정지)
+        in_use = 1;
+    }
 
-            return_resorce() {
-                in_use = 0;
-                signal (is_free);     // 대기 중인 프로세스에 할당 허용 (신호)
-            }
-        }
+    return_resorce() {
+        in_use = 0;
+        signal (is_free);     // 대기 중인 프로세스에 할당 허용 (신호)
+    }
+}
 
 
 

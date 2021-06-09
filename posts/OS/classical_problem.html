@@ -73,40 +73,40 @@
         <br>
         <code>
         <pre>
-        <strong>Synchronization variables</strong>
-        semaphore full = 0, empty = n, mutex =1;  
-        // 변수 3개가 있는데 mutex: lock과 관련, full: 차있는 버퍼, empty: 비어있는 버퍼 n개.
+<strong>Synchronization variables</strong>
+semaphore full = 0, empty = n, mutex =1;  
+// 변수 3개가 있는데 mutex: lock과 관련, full: 차있는 버퍼, empty: 비어있는 버퍼 n개.
 
-        <strong>Producer</strong>
+<strong>Producer</strong>
 
-        do{ ...
-            produce an item in x
-            ...
-            P(empty);
-            P(mutex);
-            ...
-            add x to buffer
-            ...
-            V(mutex);
-            V(full);
-        }while(1);
+do{ ...
+    produce an item in x
+    ...
+    P(empty);
+    P(mutex);
+    ...
+    add x to buffer
+    ...
+    V(mutex);
+    V(full);
+}while(1);
 
 
-        <strong>Consumer</strong>
-        
-        do{ 
-            P(full);
-            P(mutex);
-            ...
-            remove an item from buffer to y
-            ...
-            V(mutex);
-            V(empty);
-            ...
-            consume the item in y
-        }while(1);
-        </pre>
-        </code>
+<strong>Consumer</strong>
+
+do{ 
+    P(full);
+    P(mutex);
+    ...
+    remove an item from buffer to y
+    ...
+    V(mutex);
+    V(empty);
+    ...
+    consume the item in y
+}while(1);
+</pre>
+</code>
         <br>
         <br>
         <br>
@@ -116,65 +116,65 @@
         <li class="l">공유데이터를 DB라고 한다.</li>
         <li class="l">Reader와 Writer가 여러개 있다.</li>
         <li class="l">쓰는 작업은 여럿이 하면 안되지만 읽는 작업을 여럿이 해도 된다.</li>
-        <code>
-        <pre>
-        <strong>Shared data</strong>
-        int readcount = 0;
-        DB 자체;
+<code>
+<pre>
+<strong>Shared data</strong>
+int readcount = 0;
+DB 자체;
 
-        <strong>Synchronization variables</strong>
-        semaphore mutex = 1, db = 1;
+<strong>Synchronization variables</strong>
+semaphore mutex = 1, db = 1;
 
-        <strong>Writer</strong>
-        P(db);
-            ...
-        writing DB is performed
-            ...
-        V(db);
+<strong>Writer</strong>
+P(db);
+    ...
+writing DB is performed
+    ...
+V(db);
 
-        <strong>Reader</strong>
-        읽어야 할 때도 lock을 걸어야 한다. 읽는 도중에 writer가 와서 쓸 수 있기 때문이다.
-        그래서 필요한 것은 reader 변수
+<strong>Reader</strong>
+읽어야 할 때도 lock을 걸어야 한다. 읽는 도중에 writer가 와서 쓸 수 있기 때문이다.
+그래서 필요한 것은 reader 변수
 
-        P(mutex); // 여기서 mutex는 redcount에 대한 lock, readcount도 공유 변수이기 때문에 lock을 해줘야 한다.
-        readcount++;
-        if(redcount == 1)
-            P(db); // block writer
-        V(mutex);
-            ...
-        reading DB is performed
-            ...
-        P(mutex);
-        readcount--;
-        if(readcount == 0)
-            V(db); // enable writer
-        V(mutex);
-        </pre>
-        </code>
+P(mutex); // 여기서 mutex는 redcount에 대한 lock, readcount도 공유 변수이기 때문에 lock을 해줘야 한다.
+readcount++;
+if(redcount == 1)
+    P(db); // block writer
+V(mutex);
+    ...
+reading DB is performed
+    ...
+P(mutex);
+readcount--;
+if(readcount == 0)
+    V(db); // enable writer
+V(mutex);
+</pre>
+</code>
         Starvation 발생 가능! reader가 많이 들어왔을 때!<br>
         queue에 우선순위를 둬서 writer가 일정 수준을 기다리지 않게 하는 방법이 있다.<br>
         <br>
         <br>
         <br>
         <span class="h">Dining-Philosopers Problem</span><br>
-        <code>
-        <pre>
-        <strong>Synchronization</strong>
+<code>
+<pre>
+<strong>Synchronization</strong>
 
-        semaphore chopstick[5]; // Initially all variables are 1
+semaphore chopstick[5]; // Initially all variables are 1
 
-        <strong>Dining-Philosopher i</strong>
-        do{
-            P(chopstick[i]);
-            P(chopstick(i+1)%5);
-            ...
-            eat();
-            ...
-            V(chopstick[i]);
-            V(chopstick[(i+1) % 5]);
-        }while(1);
-        </pre>
-        </code>
+<strong>Dining-Philosopher i</strong>
+do{
+    P(chopstick[i]);
+    P(chopstick(i+1)%5);
+    ...
+    eat();
+    ...
+    V(chopstick[i]);
+    V(chopstick[(i+1) % 5]);
+}while(1);
+</pre>
+</code>
         <br>
         <strong>문제점</strong><br>
         <li class = "l">Deadlock 가능성이 있다.</li>
@@ -192,46 +192,46 @@
         두개는 서로 비슷하지만 monitor가 더 간단하다.
         <br>
         <br>
-        <code>
-        <pre>
-        enum {thinking, hungry, eating} state[5];
-        semaphore self[5]=0;  // 1이면 젓가락 두개를 잡을 수 있는 권한이 있다. 
-        semaphore mutex=1;
+<code>
+<pre>
+enum {thinking, hungry, eating} state[5];
+semaphore self[5]=0;  // 1이면 젓가락 두개를 잡을 수 있는 권한이 있다. 
+semaphore mutex=1;
 
-        <stron>Philocopher i</stron>
-        do {
-            pickup(i);
-            eat();
-            putdown(i);
-            think();
-        }while(1);
+<stron>Philocopher i</stron>
+do {
+    pickup(i);
+    eat();
+    putdown(i);
+    think();
+}while(1);
 
-        void putdown(int i){
-            P(mutex);
-            state[i] = thinking;
-            test((i+4)%5);
-            test((i+1)%5);
-            V(mutex);
+void putdown(int i){
+    P(mutex);
+    state[i] = thinking;
+    test((i+4)%5);
+    test((i+1)%5);
+    V(mutex);
+}
+
+void pickup(int i){
+    P(mutex);
+    state[i] = hungry;
+    test(i);
+    V(mutex);
+    P(self[i]);
+}
+
+void test (int i){
+    if(state[(i+4)%5)]!=eating && state[i]==hungry
+        && state[(i+1) % 5] ! = eating){
+            state[i] = eating) {
+                V(self[i]);
+            }
         }
-
-        void pickup(int i){
-            P(mutex);
-            state[i] = hungry;
-            test(i);
-            V(mutex);
-            P(self[i]);
-        }
-
-        void test (int i){
-            if(state[(i+4)%5)]!=eating && state[i]==hungry
-                && state[(i+1) % 5] ! = eating){
-                    state[i] = eating) {
-                        V(self[i]);
-                    }
-                }
-        }
-        </pre>
-        </code>
+}
+</pre>
+</code>
         <br>
         세마포어 변수는 보통 자원의 개수를 정해두고 그 자원을 사용하는 것인데 여기에서는 0으로 초기값을 정해 놓고 체크하고 그것이 만족될 때 semaphore를 1로 바꾸는 방식이다. <br>
         <br>
@@ -246,57 +246,57 @@
         <span class="h">Monitor</span><br>
         동시에 수행중인 프로세스 사이에서 abstract data type의 안전한 공유를 보장하기 위한 high-level synchronization construct<br>
         <br>
-        <code>
-        <pre>
-        monitor monitor-name{
-            // shared variable declarations
-            procedure body P1 (...){
-                ...
-            }
-            procedure body P2 (...){
-                ...
-            }
-            procedure body pn (...){
-                ...
-            }
-            {
-                initialization code
-            }
-        }
-        </pre>
-        </code>
+<code>
+<pre>
+monitor monitor-name{
+    // shared variable declarations
+    procedure body P1 (...){
+        ...
+    }
+    procedure body P2 (...){
+        ...
+    }
+    procedure body pn (...){
+        ...
+    }
+    {
+        initialization code
+    }
+}
+</pre>
+</code>
         <br>
         semaphore는 항상 lock을 걸어야한다. (프로그래머가 해줘야함)<br>
         monitor는 lock을 걸 필요가 없다. <br>
         모니터 내에서는 한번에 하나의 프로세스만이 활동 가능
         <br>
-        <code>
-        <pre>
-        monitor bounded_buffer
-        {
-            int buffer[N];
-            condition full, empty;
-            /* condition var.은 값을 가지지 않고 자신의 큐에 프로세스를 
-            매달아서 sleep 시키거나 큐에서 프로세스를 깨우는 역할만 함 */
+<code>
+<pre>
+monitor bounded_buffer
+{
+    int buffer[N];
+    condition full, empty;
+    /* condition var.은 값을 가지지 않고 자신의 큐에 프로세스를 
+    매달아서 sleep 시키거나 큐에서 프로세스를 깨우는 역할만 함 */
 
-            void produre (int x)
-            {
-                if thre is no empty buffer
-                    empty.wait();
-                add x to an empty buffer
-                full.signal();
-            }
+    void produre (int x)
+    {
+        if thre is no empty buffer
+            empty.wait();
+        add x to an empty buffer
+        full.signal();
+    }
 
-            void consume (int *x)
-            {
-                if there is no full buffer 
-                    full.wait();
-                remove an item from buffer and store it to *x
-                empty.signal();
-            }
-        }
-        </pre>
-        </code>
+    void consume (int *x)
+    {
+        if there is no full buffer 
+            full.wait();
+        remove an item from buffer and store it to *x
+        empty.signal();
+    }
+}
+</pre>
+</code>
         코드가 더 이해하기 쉽다. lock을 걸 필요가 없다.<br>
         <br>
         <br>

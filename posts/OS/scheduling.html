@@ -28,90 +28,90 @@
         <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] CPU_Scheduling </div><div class="date">2020.4.29</div></strong></a></div>
              <!--content-->
         <div class = "content">
-            <br>
-            <br>
-            <strong style="font-size: medium;">Scheduling Criteria</strong><br>
-            <br>
-            <li class="l">CPU utilization : keep the CPU as busy as possible </li>
-            <li class="l">Throughput : # of processes completed per time unit</li>
-            <li class="l">TurnAroundTime</li>
-            <li class="l">Waiting time</li>
-            <li class="l">Response time </li>
-            <br>
-            <br>
-            <br>
-            <strong style="font-size: medium;">Scheduling Algorithm</strong><br>
-            <br>
-            <li class="l">First-come, first-served (FCFS) scheduling</li>
-            <li class="l">Shortest-job-first (SJF) scheduling</li>
-            <li class="l">Priority scheduling</li>
-            <li class="l">Round-robin scheduling</li>
-            <li class="l">Multilevel queue scheduling</li>
-            <li class="l">Multiple feedback-queue scheduling</li>
-            <br>
-            <code>
-            <pre>
-        <strong>First-com, first-served (FCFS) scheduling</strong>
+<br>
+<br>
+<strong style="font-size: medium;">Scheduling Criteria</strong><br>
+<br>
+<li class="l">CPU utilization : keep the CPU as busy as possible </li>
+<li class="l">Throughput : # of processes completed per time unit</li>
+<li class="l">TurnAroundTime</li>
+<li class="l">Waiting time</li>
+<li class="l">Response time </li>
+<br>
+<br>
+<br>
+<strong style="font-size: medium;">Scheduling Algorithm</strong><br>
+<br>
+<li class="l">First-come, first-served (FCFS) scheduling</li>
+<li class="l">Shortest-job-first (SJF) scheduling</li>
+<li class="l">Priority scheduling</li>
+<li class="l">Round-robin scheduling</li>
+<li class="l">Multilevel queue scheduling</li>
+<li class="l">Multiple feedback-queue scheduling</li>
+<br>
+<code>
+<pre>
+<strong>First-com, first-served (FCFS) scheduling</strong>
 
-        - Non-preemptive scheduling
-        - Simplest scheduling method
-        - CPU, I/O utilities are inefficient
-            </pre>
-            </code>
-            <br>
-            <code>
-            <pre>
-        <strong>Shorest-Job-First Scheduling</strong>
+- Non-preemptive scheduling
+- Simplest scheduling method
+- CPU, I/O utilities are inefficient
+    </pre>
+    </code>
+    <br>
+    <code>
+    <pre>
+<strong>Shorest-Job-First Scheduling</strong>
 
-        - SJF algorithm is optimal in mininum waiting time
-        - Problem: difficult to know length of next CPU burst
-        - Non-preemptive SJF or Preemptive SJF
-            </pre>
-            </code>
-        <br>
-        <code>
-        <pre>
-        <strong>Priority scheduling</strong>
+- SJF algorithm is optimal in mininum waiting time
+- Problem: difficult to know length of next CPU burst
+- Non-preemptive SJF or Preemptive SJF
+    </pre>
+    </code>
+<br>
+<code>
+<pre>
+<strong>Priority scheduling</strong>
 
-        - Preemptive or Non-preemptive
-        - lower number means higher priority
+- Preemptive or Non-preemptive
+- lower number means higher priority
 
-        우선순위는 어떻게 정하는 것일까?
-            1. Internally : Time limit, memory requirement, # of open files, ratio of I/O burst and CPU burst
-            2. Externally : importance, political factors
+우선순위는 어떻게 정하는 것일까?
+    1. Internally : Time limit, memory requirement, # of open files, ratio of I/O burst and CPU burst
+    2. Externally : importance, political factors
 
-        Problem: Indefinite blocking (= starvation) of processes with lower priorities
-        => Solution : aging (gradually increase priority of processes waiting for long time)
-        레디 큐에서 오래 기다리면 기다릴 수록 우선순위를 조금씩 올려주는 것!
-        </pre>
-        </code>
-            <br>
-        <code>
-        <pre>
-        <strong>Round-robin Scheduling</strong>
-        
-        - Similar to FCFS, but it's preemptive
-        - Designed for time-sharing systems(시분할 시스템)
-        - CPU time is divided into time quantum (or time slice)
+Problem: Indefinite blocking (= starvation) of processes with lower priorities
+=> Solution : aging (gradually increase priority of processes waiting for long time)
+레디 큐에서 오래 기다리면 기다릴 수록 우선순위를 조금씩 올려주는 것!
+</pre>
+</code>
+    <br>
+<code>
+<pre>
+<strong>Round-robin Scheduling</strong>
 
-        * A time quantum is 10~qpp msec.(1초동안 10번 혹은 100번 스위칭)
+- Similar to FCFS, but it's preemptive
+- Designed for time-sharing systems(시분할 시스템)
+- CPU time is divided into time quantum (or time slice)
 
-        - Ready queue is treaded as cicular queue
-        - CPU scheduler goes around the ready queue and allocate CPU time up to 1 time quantum
-        - Time quantum에 의존적이다. 
-        - Time quantum이 만약 무한대가 되면 RR scheduling은 FCFS와 같다. 
-        - Time quantum이 0에 수렴시키면 프로세스가 거의 동시에 실행하는 것처럼 보이지만 문제점은 
-          Context switching overhead가 빈번하다.
-        - Time quantum을 어떻게 설정하느냐에 따라 성능이 결정된다. 
-        </pre>
-        </code>
-        <br>
+* A time quantum is 10~qpp msec.(1초동안 10번 혹은 100번 스위칭)
 
-        <code>
-        <pre>
-        <strong>Multilevel queue scheduling</strong>
-        </pre>
-        </code>
+- Ready queue is treaded as cicular queue
+- CPU scheduler goes around the ready queue and allocate CPU time up to 1 time quantum
+- Time quantum에 의존적이다. 
+- Time quantum이 만약 무한대가 되면 RR scheduling은 FCFS와 같다. 
+- Time quantum이 0에 수렴시키면 프로세스가 거의 동시에 실행하는 것처럼 보이지만 문제점은 
+    Context switching overhead가 빈번하다.
+- Time quantum을 어떻게 설정하느냐에 따라 성능이 결정된다. 
+</pre>
+</code>
+<br>
+
+<code>
+<pre>
+<strong>Multilevel queue scheduling</strong>
+</pre>
+</code>
 
         <br>
         <br>

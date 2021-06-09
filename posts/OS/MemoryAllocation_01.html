@@ -47,20 +47,20 @@
   • 가장 간단한 메모리 관리 기법
 
 <code>
-        <strong>문제점</strong>
-        1. 프로그램의 크기 > 메모리 크기
-        2. 커널(kernel) 보호
-        3. Low system resource utilization / Low system performance
+<strong>문제점</strong>
+1. 프로그램의 크기 > 메모리 크기
+2. 커널(kernel) 보호
+3. Low system resource utilization / Low system performance
 
-        <strong>해결법</strong>
-        1.
-            Overlay structure
-            메모리에 현재 필요한 영역만 적재
-            사용자가 프로그램의 흐름 및 자료구조를 모두 알고 있어야 함
-        2. 
-            경계 레지스터 (boundary register) 사용
-        3. 
-            Multi-programming (여러 프로세스를 메모리에 올리기)
+<strong>해결법</strong>
+1.
+    Overlay structure
+    메모리에 현재 필요한 영역만 적재
+    사용자가 프로그램의 흐름 및 자료구조를 모두 알고 있어야 함
+2. 
+    경계 레지스터 (boundary register) 사용
+3. 
+    Multi-programming (여러 프로세스를 메모리에 올리기)
 
 </code>
 
@@ -77,24 +77,24 @@
   * 각 partition의 경계와 kernel을 보호해야 하기 때문에 각 파티션 마다 boundary register를 두어야 한다. 
 
 <code>
-        <strong>! Fragmentation(단편화) !</strong>
+<strong>! Fragmentation(단편화) !</strong>
 
-        <strong>Internal fragmentation</strong>
-        • 내부 단편화
-        • Partition 크기 > Process 크기 (메모리 낭비 됨)
+<strong>Internal fragmentation</strong>
+• 내부 단편화
+• Partition 크기 > Process 크기 (메모리 낭비 됨)
 
-        <strong>External fragmentation</strong>
-        • 외부 단편화
-        • (남은 메모리 크기 > Process 크기)지만, 연속된 공간이 아님 (메모리가 낭비 됨)
+<strong>External fragmentation</strong>
+• 외부 단편화
+• (남은 메모리 크기 > Process 크기)지만, 연속된 공간이 아님 (메모리가 낭비 됨)
 
 </code>
 
 <code>
-        <strong>요약</strong>
+<strong>요약</strong>
 
-        • 고정된 크기로 메모리 미리 분할
-        • 메모리 관리가 간편함 (Low overhead)
-        • 시스템 자원이 낭비 될 수 있음(internal/external fragmentation) ! 중요 !
+• 고정된 크기로 메모리 미리 분할
+• 메모리 관리가 간편함 (Low overhead)
+• 시스템 자원이 낭비 될 수 있음(internal/external fragmentation) ! 중요 !
 
 </code>
 
@@ -106,46 +106,46 @@ fragmentation 문제를 해결 할 수 있는 variable partition Multiprogrammin
   • No internal fragmentation 
 
 <code>
-        <strong>Placement strategies (배치 전략)</strong>
+<strong>Placement strategies (배치 전략)</strong>
 
-        1. First-fit (최초 적합)
-           • 충분한 크기를 가진 첫 번째 partition을 선택
-           • simple and low overhead
-           • 공간 활용률이 떨어질 수 있음
-        
-        2. Best-fit (최적 적합)
-           • precess가 들어갈 수 있는 partition 중 가장 작은 곳 선택
-           • 탐색시간이 오래 걸림 (모든 partition을 살펴봐야 함)
-           • 크기가 큰 partition을 유지 할 수 있음
-           • 작은 크기의 partitiondl 많이 발생(활용하기 너무 작음)
+1. First-fit (최초 적합)
+    • 충분한 크기를 가진 첫 번째 partition을 선택
+    • simple and low overhead
+    • 공간 활용률이 떨어질 수 있음
 
-        3. Worst-fit (최악 적합)
-           • Process가 들어갈 수 있는 partiton 중 가장 큰 곳 선택
-           • 탐색시간이 오래 걸림 (모든 partition을 살펴봐야 함)
-           • 작은 크기의 partition 발생을 줄일 수 있음
-           • 큰 그기의 partition 확보가 어려움 (큰 프로세스에게 필요한)
-        
-        4. Next-fit (순차 최초 적합)
-           • 최초 적합 전략과 유사
-           • state table에서 마지막으로 탐색한 위치부터 탐색
-           • 메모리 영역의 사용 빈도 균등화
-           • Low overhead 
+2. Best-fit (최적 적합)
+    • precess가 들어갈 수 있는 partition 중 가장 작은 곳 선택
+    • 탐색시간이 오래 걸림 (모든 partition을 살펴봐야 함)
+    • 크기가 큰 partition을 유지 할 수 있음
+    • 작은 크기의 partitiondl 많이 발생(활용하기 너무 작음)
+
+3. Worst-fit (최악 적합)
+    • Process가 들어갈 수 있는 partiton 중 가장 큰 곳 선택
+    • 탐색시간이 오래 걸림 (모든 partition을 살펴봐야 함)
+    • 작은 크기의 partition 발생을 줄일 수 있음
+    • 큰 그기의 partition 확보가 어려움 (큰 프로세스에게 필요한)
+
+4. Next-fit (순차 최초 적합)
+    • 최초 적합 전략과 유사
+    • state table에서 마지막으로 탐색한 위치부터 탐색
+    • 메모리 영역의 사용 빈도 균등화
+    • Low overhead 
 
 </code>
 
 <code>
-        <strong>External fragmentation issue</strong>
+<strong>External fragmentation issue</strong>
 
-        1. Coalescing holes (공간 통합)
-           • 인접한 빈 영역을 하나의 partition으로 통합
-           • process가 memory를 release하고 나가면 수행
-           • Low overhead
+1. Coalescing holes (공간 통합)
+    • 인접한 빈 영역을 하나의 partition으로 통합
+    • process가 memory를 release하고 나가면 수행
+    • Low overhead
 
-        2. Storage Compaction (메모리 압축)
-           • 모든 빈 공간을 하나로 통합
-           • 프로세스 처리에 필요한 적재 공간 확보가 필요할 때 수행
-           • High overhead
-           -> 모든 process 재배치 (process 중지) , 많은 시스템 자원을 소비 
+2. Storage Compaction (메모리 압축)
+    • 모든 빈 공간을 하나로 통합
+    • 프로세스 처리에 필요한 적재 공간 확보가 필요할 때 수행
+    • High overhead
+    -> 모든 process 재배치 (process 중지) , 많은 시스템 자원을 소비 
 
 </code> 
 
@@ -153,15 +153,15 @@ fragmentation 문제를 해결 할 수 있는 variable partition Multiprogrammin
 
 <span class ="h">Continuous Memory Allocation 전체 요약</span>
 
-    1. Uni-Programming
-        • Simple
-        • Fragmentation Problem
+1. Uni-Programming
+    • Simple
+    • Fragmentation Problem
 
-    2. Fixed partition multi-programming (FPM)
+2. Fixed partition multi-programming (FPM)
 
-    3. Variable partition multi-programming (VPM)
-        • Placement strategies (First-fit, Best-fit, Worst-fit, Next-fit)
-        • External fragmentation issue (Coalescing holes, Storage compaction) 
+3. Variable partition multi-programming (VPM)
+    • Placement strategies (First-fit, Best-fit, Worst-fit, Next-fit)
+    • External fragmentation issue (Coalescing holes, Storage compaction) 
 
 </pre>  
             
