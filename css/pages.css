@@ -303,6 +303,11 @@ code{
         color: lightgray;
     }
 
+    .l_subtitle #date{
+        font-size: x-small;
+        margin-top: 3px;
+    }
+
     #tag_list .content{
         font-size: small;
         line-height: 160%;

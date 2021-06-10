@@ -28,16 +28,15 @@
         <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[OS] Classical Problem of Synchronization </div><div id="date">2021.05.06</div></strong></a></div>
              <!--content-->
         <div class = "content">
-        <br>
-        <br>
-        <li class="l">Bounded-Buffer Problem (Producer-Consumer Problem</li>
-        <li class="l">Reader and Writers Problem</li>
-        <li class="l">Dining-Philosophers Problem</li>
+            <br>
+        • Bounded-Buffer Problem (Producer-Consumer Problem)<br>
+        • Reader and Writers Problem<br>
+        • Dining-Philosophers Problem<br>
         <br>
         <br>
         <span class="h">Bounded-Buffer Problem (Producer-Consumer Problem)</span><br>
         <br>
-        임시로 데이터를 저장하는 공간을 버퍼라고 함. 공유버퍼에서 Producer, Consumer가 있음<br>
+        임시로 데이터를 저장하는 공간을 버퍼라고 함. 공유버퍼에서 Producer, Consumer가 있음<br><br>
         Producer : 데이터를 버퍼에 집어 넣는 역할<br>
         Consumer : 데이터를 버퍼에서 빼는 역할<br>
         <br>
@@ -45,31 +44,32 @@
         공유버퍼를 쓸 때 lock을 걸었다 푸는 과정이 필요하다. <br>
         Producer 입장에서는 버퍼가 가득차면 기다려야 한다.<br>
         Consumer 입장에서는 버퍼가 비면 기다려야 한다. <br>
-
+        <br>
         <code>
         <pre>
-        <strong>Producer</strong>
-        1. Empty 버퍼가 있나요? (없으면 기다림)
-        2. 공유 데이터에 lock을 건다.
-        3. Empty buffer에 데이터 입력 및 buffer 조작
-        4. Lock을 푼다.
-        5. Full buffer 하나 증가
-        </pre>    
+<strong>Producer</strong>
+1. Empty 버퍼가 있나요? (없으면 기다림)
+2. 공유 데이터에 lock을 건다.
+3. Empty buffer에 데이터 입력 및 buffer 조작
+4. Lock을 푼다.
+5. Full buffer 하나 증가
+</pre>    
         </code>
 
         <br>
         
         <code>
-        <pre>
-        <strong>Consumer</strong>
-        1. Full 버퍼가 있나요? (없으면 기다림)
-        2. 공유데이터에 lock을 건다. 
-        3. Full buffer에 데이터 입력 및 buffer 조작
-        4. Lock을 푼다.
-        5. Empty buffer 하나 증가
-        </pre>
-        </code>
-        lock을 걸고 푸는 용도로 세마포어 변수 필요 & 자원의 개수를 카운트하는 변수로 사용 <br>
+<pre>
+<strong>Consumer</strong>
+1. Full 버퍼가 있나요? (없으면 기다림)
+2. 공유데이터에 lock을 건다. 
+3. Full buffer에 데이터 입력 및 buffer 조작
+4. Lock을 푼다.
+5. Empty buffer 하나 증가
+</pre>
+</code>
+<br>
+lock을 걸고 푸는 용도로 세마포어 변수 필요 & 자원의 개수를 카운트하는 변수로 사용 <br>
         <br>
         <code>
         <pre>
@@ -151,11 +151,11 @@ if(readcount == 0)
 V(mutex);
 </pre>
 </code>
+<br>
         Starvation 발생 가능! reader가 많이 들어왔을 때!<br>
         queue에 우선순위를 둬서 writer가 일정 수준을 기다리지 않게 하는 방법이 있다.<br>
         <br>
-        <br>
-        <br>
+<br>
         <span class="h">Dining-Philosopers Problem</span><br>
 <code>
 <pre>
@@ -240,7 +240,6 @@ void test (int i){
         <li class="l">정확성 (correctness)의 입증이 어렵다</li>
         <li class="l">자발적 협력(voluntary cooperation이 필요하다.</li>
         <li class="l">한번의 실수가 모든 시스템에 치명적 영향</li>
-        <br>
         <br>
         <br>
         <span class="h">Monitor</span><br>
