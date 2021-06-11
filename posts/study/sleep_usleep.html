@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale=1.0">
+        <title>sleep함수와 usleep함수의 차이점</title>
+        <link rel="stylesheet" type="text/css" href="../../css/pages.css">
+    </head>
+</html>
+
+<body>
+    <header>
+        <h3><a href = "../../index.html">HAGUS <br> HARDWARE</a></h3> 
+        <ul id="main_menu">
+        </ul>
+
+        <script src = "../../MainMenu.js"></script>
+    </header>
+
+    <section class="section">
+    <div id = "tag_menu">
+    </div>
+
+    <script src = "../../TIL_tag_menu.js"></script>
+
+    <div id = "tag_list">
+        <div class="l_title"><a href = "../../TIL.html">Study.</a></div><hr>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>sleep(), usleep() 차이점</div><div id="date">2021.06.11</div></strong></a></div>
+             <!--====content====-->
+        <div class = "content">
+<pre>
+
+sleep(int seconds) : sleep()의 정수는 일반적인 초를 나타냄. 즉 sleep(10)하면 10초 후에 다음 작업 수행.
+
+usleep(int micro_seconds) : usleep()의 정수는 micro초를 나타냄. 즉 usleep(1) 하면 1/1000000초를 나타냄. usleep(1000000)하면 1초 후에 다음 작업을 수행. 
+
+usleep은 보다 정밀한 sleep()을 위해서 사용하는 함수.
+
+* 헤더파일(두 함수 모두) : unistd.h
+
+
+
+[Reference] https://rockdrumy.tistory.com/1052
+     
+</pre>
+
+    <br>
+    <br>
+    <br>
+    </div> 
+
+    </div>
+
+</section>
+
+    
+</body>
+
+
