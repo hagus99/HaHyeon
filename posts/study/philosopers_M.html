@@ -39,16 +39,12 @@
     const pthread_condattr_t *restrict attr);</strong>
 <i style="font-size: x-small;"> 파라미터 : 초기화할 조건 변수, 조건 변수 속성(보통 NULL)</i>
 
-<strong>int sem_wait(sem_t *sem)</strong>
-<i style="font-size: x-small;"> 파라미터 : 잠궈야 할 세마포어</i>
-
 <strong>int pthread_cond_wait(pthread_cond_t *restrict cond,
     pthread_mutex_t *restrict mutex);</strong>
 <i style="font-size: x-small;"> 파라미터 : 조건을 대기할 조건 변수,조건 변수와 연결된 뮤텍스</i>
 
 <strong>int pthread_cond_signal(pthread_cond_t *cond);</strong>
 <i style="font-size: x-small;"> 파라미터 : 조건 변수</i>
-sem_destroy()
 
 <strong>int pthread_cond_destroy(pthread_cond_t *cond);</strong>
 <i style="font-size: x-small;"> 파라미터 : 파괴될 조건 변수</i>
