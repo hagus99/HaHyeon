@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale=1.0">
+        <title>TodoList Customizing</title>
+        <link rel="stylesheet" type="text/css" href="../../css/pages.css">
+    </head>
+</html>
+
+<body>
+    <header>
+        <h3><a href = "../../index.html">HAGUS <br> HARDWARE</a></h3> 
+        <ul id="main_menu">
+        </ul>
+
+        <script src = "../../MainMenu.js"></script>
+    </header>
+
+    <section class="section">
+    <div id = "tag_menu">
+    </div>
+
+    <script src = "../../TIL_tag_menu.js"></script>
+
+    <div id = "tag_list">
+        <div class="l_title"><a href = "../../TIL.html">Study.</a></div><hr>
+        <div class = "l_subtitle"><div class = "title"><a href = "../../TIL.html"><strong>[Java]TodoList Customizing</div><div id="date">2021.07.04</div></strong></a></div>
+             <!--====content====-->
+        <div class = "content">
+        <br>    
+<pre>
+<code>
+    <strong>[목표]</strong>
+
+    1. 참조 기능 삭제 (잘 쓰지 않는 기능)
+
+    2. 수정된 시간을 지우고 마감일을 추가 (사용자가 할 일 추가 시, 마감일 까지 입력하도록 함)
+        2-1) 마감일 <strong>알림 기능</strong> (원래 계획은 하루 전날 알림, 현재 까지는 당일 알림까지 구현)
+
+    3. 할 일을 파일에 저장함 (할 일들을 파일에 쓰고 읽어옴)
+
+</code>
+
+<span class="h">1. 참조 기능 삭제</span>
+
+<hr>
+<span class="h">2. 마감일 추가 && 알림기능</span>
+
+<hr>
+<span class="h">3. 할 일 파일에 저장</span>
+
+<img src = "./img/printTodoList.png">
+<code>
+- 일단 file을 열기. 절대 경로로 지정하지 않는다면 현재 프로젝트 디렉토리에 파일을 연다.
+- 만약 열려는 파일이 없다면 새로 생성합니다.
+- 버퍼단위의 입출력을 담당하고 있는 BufferedReader, BufferedWriter (라인 단위로 파일을 읽고 쓴다) 
+
+</code>
+</pre>
+
+    <br>
+    <br>
+    <br>
+    </div> 
+
+    </div>
+
+    
+
+</section>
+
+    
+</body>
+
+
